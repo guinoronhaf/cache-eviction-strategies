@@ -1,7 +1,7 @@
-arguments=--init-script /home/guilherme/.local/share/nvim/mason/packages/jdtls/config_linux/org.eclipse.osgi/58/0/.cp/gradle/init/init.gradle
+arguments=--init-script /home/guilherme.noronha.fragoso/.local/share/nvim/mason/packages/jdtls/config_linux/org.eclipse.osgi/58/0/.cp/gradle/init/init.gradle
 auto.sync=false
 build.scans.enabled=false
-connection.gradle.distribution=GRADLE_DISTRIBUTION(VERSION(8.9))
+connection.gradle.distribution=GRADLE_DISTRIBUTION(LOCAL_INSTALLATION(/opt/gradle))
 connection.project.dir=
 eclipse.preferences.version=1
 gradle.user.home=
