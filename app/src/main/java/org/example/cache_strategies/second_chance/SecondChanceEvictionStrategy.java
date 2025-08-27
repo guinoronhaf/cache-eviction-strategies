@@ -25,6 +25,8 @@ public class SecondChanceEvictionStrategy<T> implements CacheEvictionStrategy<T>
     }
 
     public T getNextEviction() {
+        if (!cache.isFull())
+            return null;
         return cache.getNextEvictionable();
     }
 
