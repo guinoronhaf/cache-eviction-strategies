@@ -64,4 +64,5 @@ public class LFUCacheStrategy<K, V> {
         freqListMap.get(1).addFirst(key);
         minFrequency = 1;
     }
+
 }
