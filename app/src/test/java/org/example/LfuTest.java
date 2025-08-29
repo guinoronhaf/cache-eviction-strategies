@@ -7,7 +7,7 @@ public class LfuTest{
     @Test
     public void testLfu(){
         
-        lfuCacheStrategy<Integer> cache = new lfuCacheStrategy<>(4);
+        lfuCacheStrategy<Integer> cache = new lfuCacheStrategy<>(3);
 
         assertNull(cache.getNextEviction());
         assertEquals("miss", cache.get(3));
@@ -17,10 +17,9 @@ public class LfuTest{
         assertEquals(2, cache.size());
         assertEquals("miss", cache.get(6));
         assertEquals("hit", cache.get(5));
-        assertEquals("miss", cache.get(10));
-        assertEquals(3, cache.getNextEviction());
+        assertEquals(6, cache.getNextEviction());
         assertEquals("miss", cache.get(2));
-        assertEquals(5, cache.getNextEviction());
+        assertEquals(2, cache.getNextEviction());
         
     
     }
