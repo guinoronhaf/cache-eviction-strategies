@@ -76,7 +76,7 @@ public class lfuCache<T> {
     }
 
     
-public T getNextEviction(){
+    public T getNextEviction(){
     if (this.freqMap.isEmpty()) {
         return null; 
     }
@@ -85,7 +85,13 @@ public T getNextEviction(){
         return minFrenquencyList.getLast();
     }
     return null;
+
+
 }
+    public boolean isFull(){
+        return this.freqMap.size() == this.capacity;
+    }
+
 
 
 }

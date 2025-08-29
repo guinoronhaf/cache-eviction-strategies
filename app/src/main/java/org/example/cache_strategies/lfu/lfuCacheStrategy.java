@@ -29,6 +29,9 @@ public class lfuCacheStrategy<T> implements CacheEvictionStrategy<T>{
 
     
     public T getNextEviction() {
+       if(!this.cache.isFull()){
+            return null;
+       } 
        return this.cache.getNextEviction(); 
     }
 
