@@ -1,9 +1,28 @@
+package org.example.cache_strategies.fifo;
+
+/**
+ * Implementação de um cache do tipo FIFO (First In, First Out) genérico.
+ * 
+ * @param <T> Tipo dos elementos armazenados no cache.
+ */
 public class FIFOCache<T> {
+    /** Array que armazena os elementos do cache */
     private T[] fila;
+
+    /** Índice do primeiro elemento (head) */
     private int head;
+
+    /** Índice do último elemento (tail) */
     private int tail;
+
+    /** Número de elementos atualmente no cache */
     private int size;
 
+    /**
+     * Construtor que inicializa o cache com uma capacidade fixa.
+     *
+     * @param capacidade Capacidade máxima do cache.
+     */
     @SuppressWarnings("unchecked")
     public FIFOCache(int capacidade) {
         fila = (T[]) new Object[capacidade];
@@ -12,14 +31,29 @@ public class FIFOCache<T> {
         this.size = 0;
     }
 
+    /**
+     * Verifica se o cache está vazio.
+     *
+     * @return true se o cache estiver vazio, false caso contrário.
+     */
     public boolean isEmpty() {
         return this.size == 0;
     }
 
+    /**
+     * Verifica se o cache está cheio.
+     *
+     * @return true se o cache estiver cheio, false caso contrário.
+     */
     public boolean isFull() {
         return this.size == this.fila.length;
     }
 
+    /**
+     * Adiciona um elemento ao final do cache. Caso o cache esteja cheio, remove o primeiro elemento.
+     *
+     * @param valor Elemento a ser adicionado.
+     */
     public void addLast(T valor) {
         if(isFull()) {
             removeFirst();
@@ -32,16 +66,28 @@ public class FIFOCache<T> {
         this.size++;
     }
 
+    /**
+     * Remove e retorna o primeiro elemento do cache.
+     *
+     * @return O elemento removido.
+     * @throws RuntimeException Se o cache estiver vazio.
+     */
     public T removeFirst() {
         if(isEmpty()) {
             throw new RuntimeException("Esta linha não pode ser executada.");
         }
         T toRemove = this.fila[this.head];
-        this.head = (this.head - 1) % this.fila.length;
+        this.head = (this.head + 1) % this.fila.length;
         this.size--;
         return toRemove;
     }
     
+    /**
+     * Retorna o primeiro elemento do cache sem removê-lo.
+     *
+     * @return O primeiro elemento.
+     * @throws RuntimeException Se o cache estiver vazio.
+     */
     public T getFirst() {
         if(isEmpty()) {
             throw new RuntimeException("Esta linha não pode ser executada.");
@@ -49,6 +95,12 @@ public class FIFOCache<T> {
         return (T) this.fila[this.head];
     }
 
+    /**
+     * Retorna o último elemento do cache sem removê-lo.
+     *
+     * @return O último elemento.
+     * @throws RuntimeException Se o cache estiver vazio.
+     */
     public T getLast() {
         if(isEmpty()) {
             throw new RuntimeException("Esta linha não pode ser executada.");
@@ -56,6 +108,11 @@ public class FIFOCache<T> {
         return this.fila[this.tail];
     }
 
+    /**
+     * Retorna uma representação em String do cache, do primeiro ao último elemento.
+     *
+     * @return String representando os elementos do cache.
+     */
     public String toString() {
         int headAux = this.head;
         String out = "";
@@ -66,6 +123,12 @@ public class FIFOCache<T> {
         return out;
     }
 
+    /**
+     * Retorna o índice de um elemento no cache.
+     *
+     * @param value Elemento a ser buscado.
+     * @return Índice do elemento ou -1 se não encontrado.
+     */
     public int indexOf(T value) {
         int count = 0;
         while(count < this.size) {
@@ -78,8 +141,14 @@ public class FIFOCache<T> {
         return -1;
     }
 
+    /**
+     * Retorna o número de elementos atualmente no cache.
+     *
+     * @return Tamanho do cache.
+     */
     public int size() {
         return this.size;
     }
 
 }
+
