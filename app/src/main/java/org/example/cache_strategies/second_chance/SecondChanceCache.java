@@ -1,6 +1,7 @@
 package org.example.cache_strategies.second_chance;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 import org.example.cache_strategies.second_chance.util.SecondChanceEntry;
@@ -10,6 +11,7 @@ public class SecondChanceCache<T> {
     private SecondChanceEntry<T>[] entryCache;
     private int clockPointer;
     private int last;
+    private HashSet<T> inCache;
 
     private static final int CAPACITY_DEFAULT = 10;
 
@@ -18,6 +20,7 @@ public class SecondChanceCache<T> {
         this.entryCache = (SecondChanceEntry<T>[]) new SecondChanceEntry[capacity];
         this.clockPointer = 0;
         this.last = -1;
+        this.inCache = new HashSet<>();
         for (int i = 0; i < this.entryCache.length; i++)
             this.entryCache[i] = new SecondChanceEntry<T>(null);
     }
@@ -40,7 +43,7 @@ public class SecondChanceCache<T> {
 
     }
 
-    private int indexNextEvictionable() {
+    private int indexOfNextEvictionable() {
 
         if (this.isEmpty())
             throw new NoSuchElementException();
@@ -77,20 +80,19 @@ public class SecondChanceCache<T> {
 
     public void add(T value) {
 
-        int idxValue = indexOf(value);
-
-        if (idxValue != -1) {
+        if (this.inCache.contains(value)) {
             this.updateReference(value);
-            return;
-        }
-
-        if (this.isFull()) {
-            int idxEvictionable = indexNextEvictionable();
-            this.entryCache[idxEvictionable].setValue(value);
-            this.entryCache[idxEvictionable].setEvictionable(false);;
-            clockPointer = (idxEvictionable + 1) % this.entryCache.length;
         } else {
-            this.entryCache[++this.last].setValue(value);
+            if (this.isFull()) {
+                int idxEvictionable = indexOfNextEvictionable();
+                this.inCache.remove(this.entryCache[idxEvictionable].getValue());
+                this.entryCache[idxEvictionable].setValue(value);
+                this.entryCache[idxEvictionable].setEvictionable(false);;
+                clockPointer = (idxEvictionable + 1) % this.entryCache.length;
+            } else {
+                this.entryCache[++this.last].setValue(value);
+            }
+            this.inCache.add(value);
         }
 
     }
@@ -100,7 +102,7 @@ public class SecondChanceCache<T> {
     }
 
     public boolean contains(T value) {
-        return this.indexOf(value) != -1;
+        return this.inCache.contains(value);
     }
 
     public int size() {

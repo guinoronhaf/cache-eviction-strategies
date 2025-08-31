@@ -80,7 +80,7 @@ public class SecondChanceTest {
         // Ao atravessar o cache, os outros elementos
         // têm evicitonable == true
         // clockPointer na posição 1.
-        
+       
         assertEquals(0, cache.getNextEviction());
         // clockPointer na posição 1.
         
