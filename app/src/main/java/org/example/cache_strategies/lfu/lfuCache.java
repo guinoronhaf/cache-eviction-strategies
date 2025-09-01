@@ -4,6 +4,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+/**
+ *  Esta classe implementa toda a lógica da política de cache LFU
+ *
+ *  @author Artur de Lima Wanderley (@ArturALW)
+ *
+ */
+
 public class lfuCache<T> {
 
     private final static int CAPACITY_DEFAULT = 10;
@@ -23,6 +30,12 @@ public class lfuCache<T> {
         this(CAPACITY_DEFAULT);
     }
 
+   /**
+    * 
+    * @param item O item que queremos encontrar dentro do cache
+    * @return O método retorna null caso o item não esteja dentro do cache e retorna o item caso ele esteja.
+    *
+    */
     public T get(T item) {
         if (!this.freqMap.containsKey(item)) {
             return null;
@@ -44,6 +57,11 @@ public class lfuCache<T> {
         return item;
     }
 
+    /**
+     * 
+     * @param item O item que será adicionado no cache.
+     * 
+     */
     public void put(T item) {
         if (capacity == 0) {
             return;
@@ -67,15 +85,30 @@ public class lfuCache<T> {
         
     }
 
+    /**
+     * 
+     * @param item O que será verificado se está ou não no cache.
+     * @return {@code true } se o item estiver no cache; {@code false} caso contrário.
+     * 
+     */
     public boolean contains(T item){
         return this.freqMap.containsKey(item);
     }
 
+    /**
+     * 
+     * @return Retorna o tamanho do cache.
+     * 
+     */
     public Integer size(){
         return this.freqMap.size();
     }
 
-    
+    /**
+     * 
+     * @return Retorna o próximo item que será removido do cache, caso seja necessário.
+     * 
+     */
     public T getNextEviction(){
     if (this.freqMap.isEmpty()) {
         return null; 
@@ -87,7 +120,13 @@ public class lfuCache<T> {
     return null;
 
 
-}
+    }
+
+    /**
+     * 
+     * @return {@code true} caso o cache tenha atingido sua capacidade máxima; {@code false} caso contrário.
+     * 
+     */
     public boolean isFull(){
         return this.freqMap.size() == this.capacity;
     }
