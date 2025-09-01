@@ -8,7 +8,7 @@ import org.example.cache_strategies.second_chance.util.SecondChanceEntry;
 
 /**
  * Implementação da estratégia de cache SecondChance, cuja representação prática mais difundida é chamada de Clock. Aqui está definida
- * a lógica da estrutura de cache.
+ * a lógica da estrutura de cache, o qual é construído a partir de um tipo genérico T.
  *
  * @author guinoronhaf
  */
@@ -116,10 +116,23 @@ public class SecondChanceCache<T> {
         return this.last == -1;
     }
 
+    /**
+     * Retorna se o cache está cheio.
+     *
+     * @return booleano que indica se o cache está cheio ou não.
+     */
     public boolean isFull() {
         return this.last == this.entryCache.length - 1;
     }
 
+    /**
+     * Atualiza a referência para o elemento do tipo genérico T. Caso esse valor
+     * esteja presente no cache, sua flag "evictionable" é setada para false, o 
+     * que indica que o elemento tem mais uma chance de permanecer no cache. Caso
+     * contrário, adiciona-se o elemento no cache.
+     *
+     * @param value valor a ter a referência atualizada.
+     */
     public void updateReference(T value) {
 
         int idxValue = indexOf(value);
@@ -131,6 +144,14 @@ public class SecondChanceCache<T> {
 
     }
 
+    /**
+     * Adiciona o elemento no cache caso não esteja. Para tal, verifica-se qual elemento
+     * deve sair a partir do ponteiro circular "clock" e substitui-se o valor associado ao 
+     * SecondChanceEntry naquela posição. Além disso, todo elemento adicionado em cache tem 
+     * sua flag booleana "evictionable" setada para false.
+     *
+     * @param value elemento a ser adicionado no cache.
+     */
     public void add(T value) {
 
         if (this.inCache.contains(value)) {
@@ -150,18 +171,42 @@ public class SecondChanceCache<T> {
 
     }
 
+    /**
+     * Retorna o valor associado ao elemento presente na posição indicada pelo ponteiro
+     * circular "clock", desconsiderando todo o processo de travessia pelo array e o "set"
+     * das flags booleanas.
+     *
+     * @return valor associado ao SecondChanceEntry na posição indicada pelo ponteiro circular "clock".
+     */
     public T getNextEvictionable() {
         return this.entryCache[clockPointer].getValue();
     }
 
+    /**
+     * Indica se determinado elemento do tipo genérico T está presente no cache. Para tal, verifica-se se 
+     * esse mesmo elemento está contido no HashSet<T> auxiliar da classe.
+     *
+     * @param value elemento que deve-se saber se está presente no cache.
+     * @return booleano que indica se o elemento está presente ou não.
+     */
     public boolean contains(T value) {
         return this.inCache.contains(value);
     }
 
+    /**
+     * Retorna a quantidade de elementos em cache.
+     *
+     * @return a quantidade de elementos em cache.
+     */
     public int size() {
         return this.last + 1;
     }
 
+    /**
+     * Representação, em String, do cache.
+     *
+     * @return representação, em String, do cache.
+     */
     @Override
     public String toString() {
         return Arrays.toString(this.entryCache);
