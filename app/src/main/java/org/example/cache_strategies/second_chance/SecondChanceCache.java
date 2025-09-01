@@ -10,7 +10,7 @@ import org.example.cache_strategies.second_chance.util.SecondChanceEntry;
  * Implementação da estratégia de cache SecondChance, cuja representação prática mais difundida é chamada de Clock. Aqui está definida
  * a lógica da estrutura de cache, o qual é construído a partir de um tipo genérico T.
  *
- * @author guinoronhaf
+ * @author Guilherme (Github: guinoronhaf)
  */
 public class SecondChanceCache<T> {
 

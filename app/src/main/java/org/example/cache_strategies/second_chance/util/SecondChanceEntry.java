@@ -5,7 +5,7 @@ package org.example.cache_strategies.second_chance.util;
  * e uma flag booleana que indica se o elemento contido no Entry pode ser retirado do cache. A flag booleana representa
  * um bit de referência, que indica a possibilidade do elemento de deixar a estrutura de cache.
  *
- * @author guinoronhaf 
+ * @author Guilherme (Github: guinoronhaf)
  */
 public class SecondChanceEntry<T> {
 

@@ -6,7 +6,7 @@ import org.example.cache_strategies.util.CacheEvictionStrategy;
  * Implementação da classe SecondChanceEvictionStrategy, que implementa a interface CacheEvictionStrategy
  * e possui uma instância da classe de Lógica SecondChanceCache, construída a partir de um tipo genérico T.
  *
- * @author guinoronhaf
+ * @author Guilherme (Github: guinoronhaf)
  */
 public class SecondChanceEvictionStrategy<T> implements CacheEvictionStrategy<T> {
 
