@@ -3,3 +3,8 @@
 
 # Ignore Gradle build output directory
 build
+
+# Pyhton venv
+.venv/
+__pycache__/
+*.pyc
