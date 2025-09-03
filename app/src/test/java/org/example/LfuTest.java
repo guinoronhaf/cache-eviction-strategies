@@ -1,6 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import org.example.cache_strategies.lfu.lfuCacheStrategy;
+import org.example.cache_strategies.lfu.lfuCacheEvictionStrategy;
 
 public class LfuTest{
     
