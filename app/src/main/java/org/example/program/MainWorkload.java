@@ -31,28 +31,46 @@ public class MainWorkload {
 
             switch (cacheStrategy) {
                 case FIFO_CACHE:
-                    evictionStrategy = new FIFOEvictionStrategy<>();
+                    evictionStrategy = new FIFOEvictionStrategy<>(30);
                     break;
                 case LRU_CACHE:
-                    evictionStrategy = new LRUCacheEvictionStrategy<>();
+                    evictionStrategy = new LRUCacheEvictionStrategy<>(30);
                     break;
                 case LFU_CACHE:
-                    evictionStrategy = new lfuCacheEvictionStrategy<>();
+                    evictionStrategy = new lfuCacheEvictionStrategy<>(30);
                     break;
                 case RANDOM_CACHE:
-                    evictionStrategy = new RandomReplaceEvictionStrategy<>();
+                    evictionStrategy = new RandomReplaceEvictionStrategy<>(30);
                     break;
                 case SECOND_CHANCE_CACHE:
-                    evictionStrategy = new SecondChanceEvictionStrategy<>();
+                    evictionStrategy = new SecondChanceEvictionStrategy<>(30);
                     break;
                 default:
                     throw new IllegalArgumentException("ERROR!");
             }
 
+            int workloadSize = 0;
+            int hitAmount = 0;
+            int missAmount = 0;
+
             String line = "";
 
-            while ((line = reader.readLine()) != null)
-                System.out.println(evictionStrategy.get(Integer.parseInt(line)));
+            while ((line = reader.readLine()) != null) {
+    
+                int value = Integer.parseInt(line);
+
+                String result = evictionStrategy.get(value);
+
+                if (result.equals("hit"))
+                    hitAmount++;
+                else if (result.equals("miss"))
+                    missAmount++;
+
+                workloadSize++;
+
+            }
+
+            System.out.println(workloadSize + " " + hitAmount + " " + missAmount);
 
         } catch(IOException ioe) {}
 
