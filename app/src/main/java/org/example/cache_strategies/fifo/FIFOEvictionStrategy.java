@@ -22,6 +22,10 @@ public class FIFOEvictionStrategy<T> implements CacheEvictionStrategy<T> {
         this.cache = new FIFOCache<>(capacidade);
     }
 
+    public FIFOEvictionStrategy() {
+        this.cache = new FIFOCache<>();
+    }
+
     /**
      * Consulta a presença de uma chave no cache.
      * Se o elemento já estiver no cache, retorna "hit".
