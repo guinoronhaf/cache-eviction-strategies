@@ -30,8 +30,7 @@ public class LRUCache<V>  {
     }
 
     public V getFirst() {
-        if(isEmpty()) return null;
-        return head.value;
+        return isFull() ? this.head.value : null;
     }
 
     public int size() {
