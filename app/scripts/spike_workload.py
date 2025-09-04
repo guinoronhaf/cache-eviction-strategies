@@ -19,5 +19,3 @@ def generate_spike_workload(workload_size: int, spike_freq: int, max_value: int)
         while j < freq:
             print(value)
             j += 1
-
-generate_spike_workload(150000, 1500, 1000000)
