@@ -14,8 +14,11 @@ public class TestLRUCache {
         assertNull(cache.getNextEviction());
         assertEquals("miss", cache.get("a"));
         assertEquals("hit", cache.get("a"));
+        assertNull(cache.getNextEviction());
         assertEquals("miss", cache.get("b"));
+        assertNull(cache.getNextEviction());
         assertEquals("miss", cache.get("c"));
+        assertNull(cache.getNextEviction());
         assertEquals("miss", cache.get("d"));
         assertEquals("a", cache.getNextEviction());
         assertEquals(4, cache.size());
