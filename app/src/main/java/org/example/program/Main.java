@@ -1,3 +1,6 @@
+// lembrando a você, que vai mexer nisso aqui, que deve existir um .java pra cada workload. portanto, crie
+// um Spike.java, Randomic.java e Periodic.java :)
+
 package org.example.program;
 
 import java.io.BufferedReader;
