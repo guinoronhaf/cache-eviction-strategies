@@ -12,33 +12,21 @@ import org.example.cache_strategies.second_chance.SecondChanceEvictionStrategy;
 import org.example.cache_strategies.util.CacheEvictionStrategy;
 
 /**
- * Classe responsável por selecionar a política e gerar os resultados do método "get"
- * de cada 'eviction strategy'.
+ * Classe responsável por devolver os dados de hit de cada política a partir de um arquivo
+ * .txt vindo da entrada-padrão.
  *
- * MODO DE USO:
- * 1 - no diretório scripts/, utilize os arquivos main_randomic.py e main_spike.py para
- * gerar os workloads e coloque-os nos arquivos apropriados. Leia a documentação de cada
- * 'main' para entender os estilos dos argumentos.
+ * [MODO DE USO]
+ * 1 - caso sua política ainda não possua um diretório próprio em app/data/output/, crie um.
+ * 2 - em cada um desses subdiretórios próprios, deve existir três arquivos .data: randomic_output, periodic_output e spike_output.
+ * 3 - em cada um dos três arquivos criados, deve existir um cabeçalho para ajudar no plot dos gráficos:
+ *      
+ *      cacheStrategy WorkloadLength Hits
  *
- * Ex.:
- *     python3 ./main_spike.py 150000 1500 100000 > ../data/input/spike_input.txt
+ * 4 - para cada um dos inputs.txt, execute esse arquivo .java com o .txt entrada padrão e direcione para o output adequado, passando o nome da sua política como parâmetro.
  *
- * 2 - No DIRETÓRIO RAIZ DO PROJETO, com o arquivo de input em mãos, execute esta classe Java para obter os resultados
- * dos testes de carga para sua política de cache
- * 
- * Ex.:
- *     gradle runMainWorkload --quiet --args="second_chance" < app/data/input/spike_input.txt > app/data/output/second_chance/spike_output.txt
+ *      gradle runMainWorkload --quiet --args="fifo" < app/data/input/spike_input_50000.txt >> app/data/output/fifo/spike_output.data
  *
- * o output é <tamanho do workload>-<quantidade de hits>
- *
- * 
- * --IMPORTANTE--
- *  É importante que, na primeira linha de cada arquivo de output, você coloque o seguinte cabeçalho:
- *
- *  Workload length-Hits
- *
- *
- *  
+ *  OBS.: atenção para o --quiet no comando gradle e no ">>" e não ">".
  */
 public class MainWorkload {
 

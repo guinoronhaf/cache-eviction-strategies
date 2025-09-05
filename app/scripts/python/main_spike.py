@@ -1,5 +1,5 @@
 # esse arquivo funciona como main para o arquivo spike_workload.py
-# para executá-lo, você deve passar dois parâmetros:
+# para executá-lo, você deve passar três argumentos:
 # 1) a quantidade de elementos do workload
 # 3) a quantidade de elementos em cada pico
 # 2) o máximo valor que cada elemento pode assumir

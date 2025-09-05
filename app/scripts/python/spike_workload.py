@@ -13,9 +13,13 @@ def generate_spike_map(spike_size: int, spike_freq: int, max_value: int) -> dict
 
 def generate_spike_workload(workload_size: int, spike_freq: int, max_value: int):
     spike_map = generate_spike_map(workload_size // 2, spike_freq, max_value)
+    count = 0
     for value, freq in spike_map.items():
         generate_random_workload(spike_freq, max_value)
         j = 0
         while j < freq:
             print(value)
             j += 1
+        count += spike_freq + freq
+    if count < workload_size:
+        generate_random_workload(workload_size - count, max_value)
