@@ -42,6 +42,14 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+tasks.register("runMainWorkload", JavaExec) {
+    group = "application"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = "org.example.program.MainWorkload"
+    //standardInput = file("data/input/spike_input.txt").newInputStream()
+    standardInput = System.in
+}
+
 test {
     testLogging {
         events "passed", "failed"

@@ -18,6 +18,8 @@ public class FIFOCache<T> {
     /** Número de elementos atualmente no cache */
     private int size;
 
+    private static final int CAPACITY_DEFAULT = 10;
+
     /**
      * Construtor que inicializa o cache com uma capacidade fixa.
      *
@@ -29,6 +31,10 @@ public class FIFOCache<T> {
         this.head = -1;
         this.tail = -1;
         this.size = 0;
+    }
+
+    public FIFOCache() {
+        this(CAPACITY_DEFAULT);
     }
 
     /**
