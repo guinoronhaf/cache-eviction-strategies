@@ -1,15 +1,15 @@
 import random
 
-INTERVALO = 200000
-
 def carga_menor():
     freq = []
-    for i in range(40000):
-        freq.append(random.randint(0, INTERVALO - 1))
+    for i in range(periodoMaior):
+        freq.append(random.randint(0, max_value - 1))
     return freq
 
-def main():
-    carga_menor_lista = carga_menor()
+def periodic_workload(workload_size, max_value):
+    periodoMaior = int(0.2 * workload_size);
+    periodoMenor = int(0.1 * workload_size);
+    carga_menor_lista = carga_menor(periodo)
     
     cont = 0
     while cont < 4:
@@ -17,8 +17,6 @@ def main():
             print(num)
         cont += 1
         
-        for i in range(10000):
-            print(random.randint(0, INTERVALO - 1))
+        for i in range(periodoMenor):
+            print(random.randint(0, max_value - 1))
 
-if __name__ == "__main__":
-    main()
