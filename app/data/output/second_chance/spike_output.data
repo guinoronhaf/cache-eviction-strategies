@@ -1,0 +1,11 @@
+CacheStrategy WorkloadLength Hits
+second_chance 50000 24188
+second_chance 100000 49909
+second_chance 150000 75691
+second_chance 200000 99896
+second_chance 250000 125644
+second_chance 300000 151305
+second_chance 350000 175506
+second_chance 400000 201332
+second_chance 450000 227089
+second_chance 500000 251289

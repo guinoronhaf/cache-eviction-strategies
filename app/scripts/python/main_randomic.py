@@ -1,5 +1,5 @@
 # esse arquivo funciona como main para o arquivo randomic_workload.py
-# para executá-lo, você deve passar dois parâmetros:
+# para executá-lo, você deve passar dois argumentos:
 # 1) a quantidade de elementos do workload
 # 2) o máximo valor que cada elemento pode assumir
 #
