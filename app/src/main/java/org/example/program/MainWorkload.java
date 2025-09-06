@@ -33,7 +33,7 @@ public class MainWorkload {
     private static final String FIFO_CACHE = "fifo";
     private static final String LRU_CACHE = "lru";
     private static final String LFU_CACHE = "lfu";
-    private static final String RANDOM_CACHE = "random";
+    private static final String RANDOM_CACHE = "random_replacement";
     private static final String SECOND_CHANCE_CACHE = "second_chance";
 
     private static final int CACHE_CAPACITY = 10000;
