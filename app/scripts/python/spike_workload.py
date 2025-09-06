@@ -1,25 +1,18 @@
 import random
-from randomic_workload import generate_random_workload
+from randomic_workload import generate_random_workload_list 
 
-def generate_spike_map(spike_size: int, spike_freq: int, max_value: int) -> dict:
-    spike_map = dict()
-    number_of_elements = spike_size // spike_freq
-    count = 0
-    while count < number_of_elements:
-        random_value = random.randint(0, max_value)
-        spike_map[random_value] = spike_freq
-        count += 1
-    return spike_map
+MIN_NUM_SPIKE = SPIKE_SIZE_FACTOR = 5
+MIN_SPIKE_FREQ = 10
+SPIKE_GAP = 5000
 
-def generate_spike_workload(workload_size: int, spike_freq: int, max_value: int):
-    spike_map = generate_spike_map(workload_size // 2, spike_freq, max_value)
-    count = 0
-    for value, freq in spike_map.items():
-        generate_random_workload(spike_freq, max_value)
-        j = 0
-        while j < freq:
-            print(value)
-            j += 1
-        count += spike_freq + freq
-    if count < workload_size:
-        generate_random_workload(workload_size - count, max_value)
+def generate_spike_workload(workload_size, max_value):
+    num_spikes = max(MIN_NUM_SPIKE, workload_size // SPIKE_GAP)
+    spike_freq = max(MIN_SPIKE_FREQ, workload_size // (num_spikes * SPIKE_SIZE_FACTOR))
+    spike_workload = list()
+    spike_workload = generate_random_workload_list(workload_size, max_value)
+    spike_pos = random.sample(range(0, workload_size), num_spikes)
+    for position in spike_pos:
+        spike_value = random.randint(0, max_value + 1)
+        right = min(position + spike_freq, workload_size)
+        spike_workload[position:right] = [spike_value] * (right - position)
+    return spike_workload
