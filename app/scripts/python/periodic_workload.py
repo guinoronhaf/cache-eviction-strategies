@@ -8,7 +8,7 @@ def carga_menor(periodo, max_value):
 
 def periodic_workload(workload_size, max_value):
     periodoMaior = int(0.2 * workload_size);
-    periodoMenor = int(0.1 * workload_size);
+    periodoMenor = int(0.05 * workload_size);
     carga_menor_lista = carga_menor(periodoMaior, max_value)
     
     cont = 0
