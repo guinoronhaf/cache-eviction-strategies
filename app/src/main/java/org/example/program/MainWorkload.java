@@ -68,25 +68,39 @@ public class MainWorkload {
                     throw new IllegalArgumentException("ERROR!");
             }
 
-            int workloadSize = 0;
-            int hitAmount = 0;
+            String line;
+    
+            int hitCounter = 0;
+            int missCounter = 0;
 
-            String line = "";
+            long hitTime = 0;
+            long missTime = 0;
 
             while ((line = reader.readLine()) != null) {
-    
-                int value = Integer.parseInt(line);
 
-                String result = evictionStrategy.get(value);
+                long start = System.nanoTime();
 
-                if (result.equals("hit"))
-                    hitAmount++;
+                String result = evictionStrategy.get(Integer.parseInt(line));
 
-                workloadSize++;
+                long end = System.nanoTime();
+
+                long time = end - start;
+
+                if (result.equals("hit")) {
+                    hitCounter++;
+                    hitTime += time;
+                } else if (result.equals("miss")) {
+                    missCounter++;
+                    missTime += time;
+                }
 
             }
 
-            System.out.println(cacheStrategy + " " + workloadSize + " " + hitAmount);
+            int workloadLength = hitCounter + missCounter;
+            double averageHitTime = hitTime / hitCounter;
+            double averageMissTime = missTime / missCounter;
+
+            System.out.println(cacheStrategy + " " + workloadLength + " " + hitCounter + " " + averageMissTime);
 
         } catch(IOException ioe) {}
 
