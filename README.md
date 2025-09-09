@@ -32,8 +32,8 @@
 
 ## Indicadores *hit* e *miss*
 
-# Workloads
+## Workloads
 
-# Testes de carga
+## Testes de carga
 
-# Resultados
+## Resultados
