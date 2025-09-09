@@ -100,7 +100,7 @@ public class MainWorkload {
             double averageHitTime = hitTime / hitCounter;
             double averageMissTime = missTime / missCounter;
 
-            System.out.println(cacheStrategy + " " + workloadLength + " " + hitCounter + " " + averageMissTime);
+            System.out.println(cacheStrategy + " " + workloadLength + " " + hitCounter + " " + averageHitTime + " " + averageMissTime);
 
         } catch(IOException ioe) {}
 
