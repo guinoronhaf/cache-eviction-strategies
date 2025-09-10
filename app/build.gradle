@@ -50,6 +50,16 @@ tasks.register("runMainWorkload", JavaExec) {
     standardInput = System.in
 }
 
+
+// ADICIONE ESTE NOVO BLOCO DE CÓDIGO NO FIM DO FICHEIRO
+tasks.register("runMainPerformance", JavaExec) {
+    group = "application"
+    description = "Runs the MainPerformance class to get average hit/miss times"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = "org.example.program.MainPerformance" // <- A única mudança importante é aqui
+    standardInput = System.in
+}
+
 test {
     testLogging {
         events "passed", "failed"

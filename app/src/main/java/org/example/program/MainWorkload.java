@@ -71,36 +71,22 @@ public class MainWorkload {
             String line;
     
             int hitCounter = 0;
-            int missCounter = 0;
-
-            long hitTime = 0;
-            long missTime = 0;
+			int missCounter = 0;
 
             while ((line = reader.readLine()) != null) {
 
-                long start = System.nanoTime();
-
                 String result = evictionStrategy.get(Integer.parseInt(line));
 
-                long end = System.nanoTime();
-
-                long time = end - start;
-
                 if (result.equals("hit")) {
-                    hitCounter++;
-                    hitTime += time;
-                } else if (result.equals("miss")) {
-                    missCounter++;
-                    missTime += time;
-                }
+                    hitCounter++;	
+				} else {
+					missCounter++;
+				}
+			}
 
-            }
+			int workloadLength = missCounter + hitCounter;
 
-            int workloadLength = hitCounter + missCounter;
-            double averageHitTime = hitTime / hitCounter;
-            double averageMissTime = missTime / missCounter;
-
-            System.out.println(cacheStrategy + " " + workloadLength + " " + hitCounter + " " + averageHitTime + " " + averageMissTime);
+            System.out.println(cacheStrategy + " "  +  workloadLength + " " +  hitCounter);
 
         } catch(IOException ioe) {}
 
