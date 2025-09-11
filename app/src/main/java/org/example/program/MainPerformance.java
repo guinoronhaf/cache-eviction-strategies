@@ -107,8 +107,11 @@ public class MainPerformance {
             double averageHitTime = (hitCounter > 0) ? (double) totalHitTime / hitCounter : 0.0;
             double averageMissTime = (missCounter > 0) ? (double) totalMissTime / missCounter : 0.0;
 
+            // Calcula o tamanho total do workload, a partir da soma entre as quantidades de hit e miss.
+            int workloadLength = hitCounter + missCounter;
+
             // Imprime a saída no formato: [tamanho_do_cache] [tempo_medio_hit] [tempo_medio_miss]
-            System.out.println(cacheStrategy + " " + CACHE_CAPACITY + " " + averageHitTime + " " + averageMissTime);
+            System.out.println(cacheStrategy + " " + workloadLength + " " + CACHE_CAPACITY + " " + averageHitTime + " " + averageMissTime);
 
         } catch (IOException e) {
             System.err.println("Ocorreu um erro ao ler a entrada: " + e.getMessage());
