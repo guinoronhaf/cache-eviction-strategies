@@ -11,23 +11,6 @@ import org.example.cache_strategies.random_replace.RandomReplaceEvictionStrategy
 import org.example.cache_strategies.second_chance.SecondChanceEvictionStrategy;
 import org.example.cache_strategies.util.CacheEvictionStrategy;
 
-/**
- * Classe responsável por analisar a performance de tempo de cada política de cache
- * a partir de um workload vindo da entrada-padrão.
- *
- * A saída é formatada para conter três colunas:
- * CacheSize AverageHitTime(ns) AverageMissTime(ns)
- *
- * [MODO DE USO]
- * 1 - Compile o projeto.
- * 2 - Execute a classe passando o nome da política como argumento e o arquivo de workload
- * na entrada-padrão.
- *
- * Exemplo de comando:
- * gradle runMainPerformance --quiet --args="fifo" < app/data/input/spike_input_50000.txt
- *
- * OBS.: atenção para o --quiet no comando gradle para uma saída limpa.
- */
 public class MainPerformance {
 
     private static final String FIFO_CACHE = "fifo";
@@ -42,6 +25,7 @@ public class MainPerformance {
     public static void main(String[] args) {
 
         try {
+
             String cacheStrategy = args[0].toLowerCase();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -118,5 +102,6 @@ public class MainPerformance {
         }
 		
 	}
+
 }
 

@@ -11,23 +11,6 @@ import org.example.cache_strategies.random_replace.RandomReplaceEvictionStrategy
 import org.example.cache_strategies.second_chance.SecondChanceEvictionStrategy;
 import org.example.cache_strategies.util.CacheEvictionStrategy;
 
-/**
- * Classe responsável por devolver os dados de hit de cada política a partir de um arquivo
- * .txt vindo da entrada-padrão.
- *
- * [MODO DE USO]
- * 1 - caso sua política ainda não possua um diretório próprio em app/data/output/, crie um.
- * 2 - em cada um desses subdiretórios próprios, deve existir três arquivos .data: randomic_output, periodic_output e spike_output.
- * 3 - em cada um dos três arquivos criados, deve existir um cabeçalho para ajudar no plot dos gráficos:
- *      
- *      cacheStrategy WorkloadLength Hits
- *
- * 4 - para cada um dos inputs.txt, execute esse arquivo .java com o .txt entrada padrão e direcione para o output adequado, passando o nome da sua política como parâmetro.
- *
- *      gradle runMainWorkload --quiet --args="fifo" < app/data/input/spike_input_50000.txt >> app/data/output/fifo/spike_output.data
- *
- *  OBS.: atenção para o --quiet no comando gradle e no ">>" e não ">".
- */
 public class MainWorkload {
 
     private static final String FIFO_CACHE = "fifo";
@@ -36,6 +19,7 @@ public class MainWorkload {
     private static final String RANDOM_CACHE = "random_replacement";
     private static final String SECOND_CHANCE_CACHE = "second_chance";
 
+    // A capacidade do cache pode ser ajustada aqui.
     private static final int CACHE_CAPACITY = 10000;
 
     public static void main(String[] args) {
