@@ -1,4 +1,4 @@
-package org.example.cache_strategies.second_chance.util;
+package org.example.cache_strategies.second_chance;
 
 /**
  * Representação de um Entry para o cache Second Chance, que contém o valor, do tipo genérico T, a ser armazenado
