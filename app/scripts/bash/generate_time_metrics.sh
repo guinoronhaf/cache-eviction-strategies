@@ -29,16 +29,16 @@ current_value=$workload_size
 
 # --- Preparação do Diretório e Arquivo de Saída ---
 # MODIFICADO: O caminho base agora aponta para 'app/data/output'
-output_dir="./app/data/output/${cache_strategy}"
+output_dir="./app/data/output/${cache_strategy}/time_metric"
 # MODIFICADO: O nome do arquivo agora inclui '_performance' para diferenciar da análise de hits
-output_file="${output_dir}/${workload_type}_performance.data"
+output_file="${output_dir}/${workload_type}_time_metric.data"
 
 # Cria o diretório de saída se ele não existir
 mkdir -p ${output_dir}
 
 # Cria o arquivo de dados e adiciona um cabeçalho para clareza
 # O '>' apaga o arquivo se ele existir, garantindo um novo começo para cada execução completa do script.
-echo "CacheStrategy CacheSize AverageHitTime(ns) AverageMissTime(ns)" > ${output_file}
+echo "CacheStrategy WorkloadLength CacheSize AverageHitTime(ns) AverageMissTime(ns)" > ${output_file}
 
 echo "-> Iniciando análise de performance para a estratégia '${cache_strategy}' com workload '${workload_type}'..."
 echo "-> Os resultados serão salvos em: ${output_file}"
