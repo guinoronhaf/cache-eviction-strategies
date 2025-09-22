@@ -1,4 +1,4 @@
-CacheStrategy WorkloadlLength Hits
+CacheStrategy WorkloadLength Hits
 random_replacement 50000 84
 random_replacement 100000 211
 random_replacement 150000 275

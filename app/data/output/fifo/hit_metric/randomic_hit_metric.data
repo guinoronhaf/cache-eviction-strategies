@@ -1,4 +1,4 @@
-CacheStrategy WorkloadlLength Hits
+CacheStrategy WorkloadLength Hits
 fifo 50000 90
 fifo 100000 192
 fifo 150000 283

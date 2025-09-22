@@ -1,4 +1,4 @@
-CacheStrategy WorkloadlLength Hits
+CacheStrategy WorkloadLength Hits
 lfu 50000 89
 lfu 100000 193
 lfu 150000 282

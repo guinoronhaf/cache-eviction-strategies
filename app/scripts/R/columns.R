@@ -7,6 +7,6 @@ data = read.table(args[length(args)], header = T)
 
 ggplot(data, aes(x = WorkloadLength, y = Hits, fill = CacheStrategy)) +
     geom_bar(stat = "identity", position = "dodge") +
-    labs(title = "Gráfico de barras",
-         x = "Tamamho do Workload",
+    labs(title = "Hits per Cache Strategy",
+         x = "Workload Length",
          y = "Hits")

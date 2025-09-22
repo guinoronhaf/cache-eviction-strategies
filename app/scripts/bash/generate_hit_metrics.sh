@@ -15,7 +15,7 @@ echo "-> Iniciando geração de outputs para a estratégia '${cache_strategy}' c
 output_file="./app/data/output/${cache_strategy}/hit_metric/${workload_type}_hit_metric.data"
 echo "-> Os resultados serão salvos em: ${output_file}"
 
-echo "CacheStrategy WorkloadlLength Hits" > ${output_file}
+echo "CacheStrategy WorkloadLength Hits" > ${output_file}
 
 while [ $current_value -le $final_value ]; do
     # Adiciona uma mensagem para cada iteração do loop

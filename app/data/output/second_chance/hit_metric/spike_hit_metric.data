@@ -1,4 +1,4 @@
-CacheStrategy WorkloadlLength Hits
+CacheStrategy WorkloadLength Hits
 second_chance 50000 9466
 second_chance 100000 17648
 second_chance 150000 28274
