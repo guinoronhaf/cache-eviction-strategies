@@ -1,4 +1,4 @@
-CacheStrategy WorkloadLength CacheSize AverageHitTime(ns) AverageMissTime(ns)
+CacheStrategy WorkloadLength CacheSize AverageHitTime AverageMissTime
 lru 50000 10000 1815.611111111111 287.50468843919055
 lru 100000 10000 1271.8638743455497 221.22913765291707
 lru 150000 10000 1145.1024734982332 173.37367166053286

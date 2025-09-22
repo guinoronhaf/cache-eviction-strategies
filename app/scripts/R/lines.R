@@ -5,7 +5,8 @@ args <- commandArgs()
 
 data = read.table(args[length(args)], header = T)
 
-ggplot(data, aes(x = WorkloadLength, y = AverageMissTime, colour = CacheStrategy)) + geom_line()
-    + labs(title = "Average Miss time per Cache Strategy",
+ggplot(data, aes(x = WorkloadLength, y = AverageMissTime, colour = CacheStrategy)) + 
+    geom_line() +
+    labs(title = "Average Miss time per Cache Strategy",
            x = "Workload Length",
            y = "Average Miss time (ns)")

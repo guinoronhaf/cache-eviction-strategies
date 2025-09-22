@@ -1,4 +1,4 @@
-CacheStrategy WorkloadLength CacheSize AverageHitTime(ns) AverageMissTime(ns)
+CacheStrategy WorkloadLength CacheSize AverageHitTime AverageMissTime
 random_replacement 50000 10000 4814.176470588235 11455.359270760293
 random_replacement 100000 10000 3646.8102564102564 11172.504543860528
 random_replacement 150000 10000 4053.630996309963 11735.845046717737

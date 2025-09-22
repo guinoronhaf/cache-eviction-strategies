@@ -1,4 +1,4 @@
-CacheStrategy WorkloadLength CacheSize AverageHitTime(ns) AverageMissTime(ns)
+CacheStrategy WorkloadLength CacheSize AverageHitTime AverageMissTime
 fifo 50000 10000 7255.066666666667 12804.034441995593
 fifo 100000 10000 7100.046875 13394.147673533183
 fifo 150000 10000 7349.586572438163 13936.168063746936
