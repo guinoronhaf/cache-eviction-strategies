@@ -2,16 +2,16 @@ package org.example.cache_strategies.lfu;
 
 import org.example.cache_strategies.util.CacheEvictionStrategy; 
 
-public class lfuCacheEvictionStrategy<T> implements CacheEvictionStrategy<T>{
+public class LfuCacheEvictionStrategy<T> implements CacheEvictionStrategy<T>{
 
-    private lfuCache<T> cache;
+    private LfuCache<T> cache;
 
-    public lfuCacheEvictionStrategy(int capacity){
-        this.cache = new lfuCache<>(capacity);
+    public LfuCacheEvictionStrategy(int capacity){
+        this.cache = new LfuCache<>(capacity);
     }
 
-    public lfuCacheEvictionStrategy(){
-        this.cache = new lfuCache<>();
+    public LfuCacheEvictionStrategy(){
+        this.cache = new LfuCache<>();
     }
 
     public String get(T value){
