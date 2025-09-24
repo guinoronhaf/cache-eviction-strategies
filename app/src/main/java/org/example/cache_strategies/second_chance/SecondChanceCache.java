@@ -116,10 +116,7 @@ public class SecondChanceCache<T> {
      * @param value valor a ter a referência atualizada.
      */
     public void updateReference(T value) {
-        if (this.indexMap.containsKey(value))
-            this.entryCache[this.indexMap.get(value)].setEvictionable(false);
-        else
-            this.add(value);
+        this.entryCache[this.indexMap.get(value)].setEvictionable(false);
     }
 
     /**
@@ -132,20 +129,16 @@ public class SecondChanceCache<T> {
      */
     public void add(T value) {
 
-        if (this.indexMap.containsKey(value)) {
-            this.updateReference(value);
+        if (this.isFull()) {
+            int idxEvictionable = indexOfNextEvictionable();
+            this.indexMap.remove(this.entryCache[idxEvictionable].getValue());
+            this.entryCache[idxEvictionable].setValue(value);
+            this.entryCache[idxEvictionable].setEvictionable(false);
+            this.indexMap.put(value, idxEvictionable);
+            clockPointer = (idxEvictionable + 1) % this.entryCache.length;
         } else {
-            if (this.isFull()) {
-                int idxEvictionable = indexOfNextEvictionable();
-                this.indexMap.remove(this.entryCache[idxEvictionable].getValue());
-                this.entryCache[idxEvictionable].setValue(value);
-                this.entryCache[idxEvictionable].setEvictionable(false);
-                this.indexMap.put(value, idxEvictionable);
-                clockPointer = (idxEvictionable + 1) % this.entryCache.length;
-            } else {
-                this.entryCache[++this.last].setValue(value);
-                this.indexMap.put(value, this.last);
-            }
+            this.entryCache[++this.last].setValue(value);
+            this.indexMap.put(value, this.last);
         }
 
     }
