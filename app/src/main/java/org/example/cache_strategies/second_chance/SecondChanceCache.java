@@ -2,6 +2,7 @@ package org.example.cache_strategies.second_chance;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 import org.example.cache_strategies.second_chance.util.SecondChanceEntry;
@@ -22,7 +23,7 @@ public class SecondChanceCache<T> {
     /**
      * Apontador inteiro clockPointer, que atravessa o cache de maneira circular, similar aos ponteiros de um relógio.
      */
-    private int clockPointer;
+    public int clockPointer;
 
     /**
      * Apontador inteiro que indica a posição da última adição de um elemento no cache. Seu valor padrão é -1, já que,
@@ -31,10 +32,11 @@ public class SecondChanceCache<T> {
     private int last;
 
     /**
-     * HashSet<T> que armazena os elementos atualmente presentes no cache. Tem-se assim, a verificação da presença de um elemento 
-     * em cache em tempo aproximadamente constante, ou seja, O(1).
+     * HashMap<T, Integer> que armazena os elementos atualmente presentes em
+     * cache. Além disso, associa cada valor a sua posição no array, o que
+     * eleva a eficiência da consulta.
      */
-    private HashSet<T> inCache;
+    private HashMap<T, Integer> indexMap;
 
     /**
      * Capacidade padrão (default) da estrutura de cache.
@@ -52,7 +54,7 @@ public class SecondChanceCache<T> {
         this.entryCache = (SecondChanceEntry<T>[]) new SecondChanceEntry[capacity];
         this.clockPointer = 0;
         this.last = -1;
-        this.inCache = new HashSet<>();
+        this.indexMap = new HashMap<>();
         for (int i = 0; i < this.entryCache.length; i++)
             this.entryCache[i] = new SecondChanceEntry<T>(null);
     }
@@ -63,26 +65,6 @@ public class SecondChanceCache<T> {
      */
     public SecondChanceCache() {
         this(CAPACITY_DEFAULT);
-    }
-
-    /**
-     * Retorna o índice do elemento genérico T buscado no array principal. Caso o elemento não esteja presente, o valor retornado é -1.
-     *
-     * @param value valor procurado.
-     * @return o índice do elemento no array.
-     */
-    private int indexOf(T value) {
-
-        if (value == null)
-            throw new IllegalArgumentException();
-
-        for (int i = 0; i <= this.last; i++) {
-            if (this.entryCache[i].getValue().equals(value))
-                return i;
-        }
-
-        return -1;
-
     }
 
     /**
@@ -134,14 +116,7 @@ public class SecondChanceCache<T> {
      * @param value valor a ter a referência atualizada.
      */
     public void updateReference(T value) {
-
-        int idxValue = indexOf(value);
-
-        if (idxValue == -1)
-            this.add(value);
-        else
-            this.entryCache[idxValue].setEvictionable(false);
-
+        this.entryCache[this.indexMap.get(value)].setEvictionable(false);
     }
 
     /**
@@ -154,19 +129,16 @@ public class SecondChanceCache<T> {
      */
     public void add(T value) {
 
-        if (this.inCache.contains(value)) {
-            this.updateReference(value);
+        if (this.isFull()) {
+            int idxEvictionable = indexOfNextEvictionable();
+            this.indexMap.remove(this.entryCache[idxEvictionable].getValue());
+            this.entryCache[idxEvictionable].setValue(value);
+            this.entryCache[idxEvictionable].setEvictionable(false);
+            this.indexMap.put(value, idxEvictionable);
+            clockPointer = (idxEvictionable + 1) % this.entryCache.length;
         } else {
-            if (this.isFull()) {
-                int idxEvictionable = indexOfNextEvictionable();
-                this.inCache.remove(this.entryCache[idxEvictionable].getValue());
-                this.entryCache[idxEvictionable].setValue(value);
-                this.entryCache[idxEvictionable].setEvictionable(false);;
-                clockPointer = (idxEvictionable + 1) % this.entryCache.length;
-            } else {
-                this.entryCache[++this.last].setValue(value);
-            }
-            this.inCache.add(value);
+            this.entryCache[++this.last].setValue(value);
+            this.indexMap.put(value, this.last);
         }
 
     }
@@ -190,7 +162,7 @@ public class SecondChanceCache<T> {
      * @return booleano que indica se o elemento está presente ou não.
      */
     public boolean contains(T value) {
-        return this.inCache.contains(value);
+        return this.indexMap.containsKey(value);
     }
 
     /**

@@ -38,7 +38,7 @@ mkdir -p ${output_dir}
 
 # Cria o arquivo de dados e adiciona um cabeçalho para clareza
 # O '>' apaga o arquivo se ele existir, garantindo um novo começo para cada execução completa do script.
-echo "CacheStrategy WorkloadLength CacheSize AverageHitTime(ns) AverageMissTime(ns)" > ${output_file}
+echo "CacheStrategy WorkloadLength CacheSize AverageHitTime AverageMissTime" > ${output_file}
 
 echo "-> Iniciando análise de performance para a estratégia '${cache_strategy}' com workload '${workload_type}'..."
 echo "-> Os resultados serão salvos em: ${output_file}"
