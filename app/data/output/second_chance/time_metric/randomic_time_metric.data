@@ -1,4 +1,4 @@
-CacheStrategy WorkloadLength CacheSize AverageHitTime(ns) AverageMissTime(ns)
+CacheStrategy WorkloadLength CacheSize AverageHitTime AverageMissTime
 second_chance 50000 10000 8041.2 814.9753756762171
 second_chance 100000 10000 4792.853403141361 595.1676502119047
 second_chance 150000 10000 4166.975265017668 495.65726670985924
