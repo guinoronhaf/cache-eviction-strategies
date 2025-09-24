@@ -1,13 +1,15 @@
+package org.example;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import org.example.cache_strategies.lfu.lfuCacheEvictionStrategy;
+import org.example.cache_strategies.lfu.LfuCacheEvictionStrategy;
 
 public class LfuTest{
     
     @Test
     public void testLfu(){
         
-        lfuCacheEvictionStrategy<Integer> cache = new lfuCacheEvictionStrategy<>(3);
+        LfuCacheEvictionStrategy<Integer> cache = new LfuCacheEvictionStrategy<>(3);
         
         assertEquals(0, cache.size());
 
@@ -31,7 +33,7 @@ public class LfuTest{
     @Test
     public void testCacheFrequenciaMinimaRepetida(){
 
-        lfuCacheEvictionStrategy<String> cache = new lfuCacheEvictionStrategy<>(3);
+        LfuCacheEvictionStrategy<String> cache = new LfuCacheEvictionStrategy<>(3);
 
         assertEquals("miss", cache.get("a"));
         assertEquals("miss", cache.get("b"));

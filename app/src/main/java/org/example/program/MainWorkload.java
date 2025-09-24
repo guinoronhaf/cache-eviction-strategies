@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.example.cache_strategies.fifo.FIFOEvictionStrategy;
-import org.example.cache_strategies.lfu.lfuCacheEvictionStrategy;
+import org.example.cache_strategies.lfu.LfuCacheEvictionStrategy;
 import org.example.cache_strategies.lru_cache.LRUCacheEvictionStrategy;
 import org.example.cache_strategies.random_replace.RandomReplaceEvictionStrategy;
 import org.example.cache_strategies.second_chance.SecondChanceEvictionStrategy;
@@ -56,7 +56,7 @@ public class MainWorkload {
                     evictionStrategy = new LRUCacheEvictionStrategy<>(CACHE_CAPACITY);
                     break;
                 case LFU_CACHE:
-                    evictionStrategy = new lfuCacheEvictionStrategy<>(CACHE_CAPACITY);
+                    evictionStrategy = new LfuCacheEvictionStrategy<>(CACHE_CAPACITY);
                     break;
                 case RANDOM_CACHE:
                     evictionStrategy = new RandomReplaceEvictionStrategy<>(CACHE_CAPACITY);

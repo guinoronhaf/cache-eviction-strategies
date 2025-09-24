@@ -11,7 +11,7 @@ import java.util.Map;
  *
  */
 
-public class lfuCache<T> {
+public class LfuCache<T> {
 
     private final static int CAPACITY_DEFAULT = 10;
     private final int capacity;
@@ -19,14 +19,14 @@ public class lfuCache<T> {
     private final Map<T, Integer> freqMap;
     private final Map<Integer, LinkedList<T>> freqListMap;
 
-    public lfuCache(int capacity) {
+    public LfuCache(int capacity) {
         this.capacity = capacity;
         this.minFrequency = 0;
         this.freqMap = new HashMap<>();
         this.freqListMap = new HashMap<>();
     }
 
-    public lfuCache() {
+    public LfuCache() {
         this(CAPACITY_DEFAULT);
     }
 
