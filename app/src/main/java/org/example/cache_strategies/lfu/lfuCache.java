@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class LfuCache<T> {
 
-    private final static int CAPACITY_DEFAULT = 10;
+    private final static int CAPACITY_DEFAULT = 11;
     private final int capacity;
     private int minFrequency;
     private final Map<T, Integer> freqMap;
