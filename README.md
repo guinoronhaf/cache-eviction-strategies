@@ -129,7 +129,13 @@ frequência | valor
         .
 ```
 
+Um _workload_ randômico pode representar situações reais em que o padrão de acesso não segue uma lógica previsível ou periódica, mas sim ocorre de forma dispersa e variável ao longo do tempo. Esse tipo de comportamento é comum em sistemas com usuários humanos, por exemplo em plataformas de streaming, redes sociais ou servidores web, onde cada acesso depende de escolhas individuais e imprevisíveis. Também aparece em cenários de segurança da informação, como ataques de negação de serviço distribuídos (DDoS), nos quais os acessos são aleatórios e massivos. Assim, _workloads_ randômicos são úteis para modelar ambientes com alta incerteza e forte influência de eventos externos.
+
+
 ### _Periodic_
+
+O _workload_ periódico é aquele em que a carga de trabalho segue um padrão repetitivo e ocorre em intervalos regulares, sem depender de eventos inesperados. Esse comportamento torna sua execução previsível, permitindo planejar recursos e otimizar desempenho com mais precisão.
+
 ```bash
 frequência | valor
         .
@@ -168,7 +174,13 @@ frequência | valor
         .
         .
 ```
+
+Um exemplo cotidiano desse tipo de _workload_ é a sincronização automática de e-mails, que ocorre em intervalos definidos. Também podemos citar notificações de aplicativos que consultam os servidores a cada poucos minutos para verificar novas mensagens, ou as atualizações de antivírus que seguem um cronograma fixo para buscar novas assinaturas. Esses casos evidenciam cargas que seguem um agendamento técnico pré-estabelecido, ao invés de surgirem de forma aleatória.
+
 ### _Spike_
+
+_Workloads_ do tipo _spike_ são aqueles em que a demanda é geralmente baixa ou moderada, mas ocasionalmente dispara em picos muito altos por curtos períodos de tempo. Esse comportamento é imprevisível e exige que o sistema consiga lidar com sobrecargas momentâneas sem degradar o desempenho.
+
 ```bash
 frequência | valor
         .
@@ -200,5 +212,6 @@ frequência | valor
         .
         .
 ```
+Exemplos comuns incluem do _spike_ são acessos a sites de notícias durante acontecimentos importantes, consultas em e-commerces quando um produto entra em promoção relâmpago, ou o aumento repentino de buscas em redes sociais por um assunto viral. Nesses casos, o _workload_ não é constante nem periódico, mas gera picos intensos que podem estressar servidores e sistemas de armazenamento.
 
 ## Resultados
