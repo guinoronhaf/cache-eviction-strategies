@@ -35,7 +35,8 @@
   |─── data
   |    |── graphs
   |         |── hit_graphs
-  |         └── time_graphs
+  |         |── hit_time_graphs
+  |         └── miss_ime_graphs
   |    |── input
   |        |── periodic_inputs
   |        |── randomic_inputs
