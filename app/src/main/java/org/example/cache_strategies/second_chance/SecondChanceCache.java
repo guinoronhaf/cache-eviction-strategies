@@ -1,11 +1,8 @@
 package org.example.cache_strategies.second_chance;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-
-import org.example.cache_strategies.second_chance.util.SecondChanceEntry;
 
 /**
  * Implementação da estratégia de cache SecondChance, cuja representação prática mais difundida é chamada de Clock. Aqui está definida
