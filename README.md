@@ -16,8 +16,6 @@
 
 - [_Workloads_](#workloads)
 
-- [Testes de carga](#testes-de-carga)
-
 - [Resultados](#resultados)
 
 ## Estrutura de diretórios
@@ -202,7 +200,5 @@ frequência | valor
         .
         .
 ```
-
-## Testes de carga
 
 ## Resultados
