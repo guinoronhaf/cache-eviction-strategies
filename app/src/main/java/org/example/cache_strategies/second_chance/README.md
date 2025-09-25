@@ -3,7 +3,7 @@
 ## Definição
 Em sistemas operacionais de memória virtual, é preciso, por vezes, recuperar dados de armazenamento secundário e lançá-los na memória principal. Tais dados são recuperados em blocos de tamanho fixo chamados páginas, também conhecidas como **páginas de memória** ou **memória virtual**.
 
-O processo de **paginamento**, ou _swapping_, permite que, uma vez que um dado/página para o qual não existe referência na memória principal é requerido, uma exceção do tipo "falha de página" é lançada, e assim busca-se pela página na memória secundária, trazendo-a para o armazenamento principal.
+O processo de **paginação**, ou _swapping_, permite que, uma vez que um dado/página para o qual não existe referência na memória principal é requerido, uma exceção do tipo "falha de página" é lançada, e assim busca-se pela página na memória secundária, trazendo-a para o armazenamento principal.
 
 Entretanto, é sabido que a memória _RAM_, apesar de possuir acesso rápido, é bastante limitada em relação à memória secundária, o que gera a necessidade de otimizar o espaço existente com páginas que possam ser re-acessadas com maior frequência. Nesse sentido, surgem estratégias/algoritmos de _page replacement_ que buscam, a princípio, diminuir a quantidade de _page faults_ - a necessidade de buscar páginas na memória secundária - e promover maior eficiência em termos de complexidade algorítmica e computacional. Uma delas é chamada de _Second Chance_.
 
@@ -36,3 +36,16 @@ No que tange à quantidade de _hits_ em _workloads randômicos, _Second Chance_ 
 O gráfico a seguir retrata a comparação das quantidades de _hits_ por **política de _cache_** em _workloads_ totalmente randômicos:
 
 ![Texto alternativo](../../../../../../../data/graphs/hit_graphs/general_randomic_hit_graph.png)
+#### Tempo médio de _hit_
+Comparado ao de outras políticas abordadas nesse materia, o tempo médio de _hit_ de _Second Chance_ é mais eficiente. Isso se deve sobretudo à ordem de complexidade atrelada a busca por um elemento em _cache_. No caso da _Second Chance_, essa busca é _**O(1)**_, já que uma tabela _Hash_ é utilizada para associar cada elemento a alguma posição no _Array_ que serve de base para o cache. Dessa forma, o _**contains(T value)**_ nada mais é do que um método _**containsKey(T value)**_ aplicado a um _HashMap_ de Java.
+
+```Java
+public boolean contains(T value) {
+  return this.indexMap.containsKey(T value);
+}
+```
+É interessante observar que os tempos médios de _hit_ de _Second Chance_ são bastante próximos dos tempos médios da política _LRU_. Isso se dá majoritariamente pela utilização, em ambas as estratégias, de tabelas _Hash_ como estruduras de dados para busca de elementos. No entanto, _Second Chance_ possui constantes menores em virtude da baixa quantidade de operações subsequentes à verificação da chave na tabela _Hash_. O seguinte gráfico ilustra esse comportamento:
+
+![Texto alternativo](../../../../../../../data/graphs/hit_time_graphs/general_randomic_time_graph.png)
+
+#### Tempo médio de _miss_
