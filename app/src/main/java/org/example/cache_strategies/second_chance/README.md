@@ -53,6 +53,10 @@ public boolean contains(T value) {
 
 ![Texto alternativo](../../../../../../../data/graphs/hit_time_graphs/general_randomic_time_graph.png)
 
+É interessante observar, ainda, a existência de uma curvatura considerável no gráfico de tempo médio de _hit_ de _Second Chance_. Tal curvatura pode ser justificada a partir de uma análise estatística. Em _workloads_ pequenos, especialmente em cargas randômicas, a quantidade de _hits_ é menor. Isso significa que qualquer alteração em uma métrica de _hit_ (a qual ocorre, eventualmente) é suficiente para deslocar a média para cima, neste caso. Portanto, conforme as cargas aumentam, a quantidade de _hits_ que seguem a complexidade esperada - _O(1)_ - aumenta, diluindo os _hits_ custosos e eventuais. Uma versão **ampliada** e **individual** do gráfico de tempo médio de _hit_ para _Second Chance_ encontra-se aqui:
+
+![Texto alternativo](../../../../../../../data/graphs/hit_time_graphs/randomic/second_chance_time_graph.png)
+
 #### Tempo médio de _miss_
 Em se tratanto de tempo médio de _miss_, a política de _Second Chance_ se sai bem conforme o comprimento dos workloads aumenta de forma contínua. Isso ocorre em virtude de uma propriedade bastante interessante dessa estratégia referente a complexidade linear de um _miss_. Como abordado em tópicos anteriores, no caso em que o valor buscado não está em _cache_, deve-se iterar pela lista de elementos, partindo daquele marcado como **vítima**, e buscando dados cujo bit de referência seja **0**. Naturalmente, esse processo possui complexidade _**O(n)**_, já que, no pior caso, itera-se por **toda** a estrutura até encontrar um elemento que cumpra esse requisito.
 
@@ -118,3 +122,27 @@ Graficamente, o comportamento dos tempos médios de _miss_ de _Second Chance_ em
 ![Texto Alternativo](../../../../../../../data/graphs/miss_time_graphs/randomic/second_chance_time_graph.png)
 
 ### _Periodic workload_
+#### Quantidade de _hits_
+Assim como no _workload_ randômico, tem-se aqui um aumento contínuo da quantidade de hits conforme a magnitude da carga de dados cresce. É importante notar, entretanto, qua a quantidade de _hits_ é maior se comparada às métricas para cargas randômicas de mesmo comprimento. Isso reforça o caráter periódico do _workload_, que replica uma sequência de valores aleatórios várias vezes em intervalos de tempo iguais, criando periodicidade.
+
+Em uma comparação com as demais estratégias de _cache_, _Second Chance_ possui um desempenho regular, ainda que inferior a _Random Replacement_, para _workloads_ de tamanhos específicos, e _LFU_, em todos os tamanhos.
+
+#### Tempo médio de _hit_
+Mais uma vez, _Second Chance_ se mostra eficiente em relação ao tempo médio de _hit_, obtendo bom desempenho em todos os tamanhos de workload. O gráfico a seguir apresenta uma comparação de tempo médio de _hit_ entre todas as políticas abordadas no projeto para _workloads_ randômicos.
+
+![Texto alternativo](../../../../../../../data/graphs/hit_time_graphs/general_periodic_time_graph.png)
+
+É importante notar que apesar de esse gráfico, para a _Second Chance_, ser similar ao gráfico de tempos médios de _hit_ para _workloads_ randômicos, observa um pico no último gráfico. Na faixa de tamanho de _workload_ entre 50.000 e 250.000 elementos a curva de cargas periódicas tem acentuação maior. A princípio, a justificativa é mesma utilizada para explicar o formato curvo do gráfico em _workloads_ randômicos. No entanto, no caso periódico, há uma diferença substancial: a quantidade de _hits_ é **maior**.
+
+![Texto alternativo](../../../../../../../data/graphs/hit_graphs/general_periodic_hit_graph.png)
+
+Note que, em _workloads_ com 1 milhão de elementos, _Second Chance_ possui aproximadamente 2.300 _hits_ no caso periódico contra menos de 2000 no fluxo randômico; possui quase 1300 _hits para 500.000 elementos periódicos contra menos de 1000 em 500.000 randômicos. Uma vez que já foi compreendido que, em cargas de comprimento menor, poucos _hits_ custosos influenciam a média geral, é possível concluir que um número maior de _hits_ nesse intervalo de comprimento - o que pressupõe mais _hits_ cujo custo fogem do padrão - lançariam ainda mais a média para cima, gerando um pico maior.
+
+É razoável assumir, portanto, que o pico maior observado na curva de _workloads_ periódicos está estritamente relacionado tanto com a quantidade maior de _hits_ quanto com a existência de _hits_ eventuais que custam caro.
+
+De forma conclusiva, apesar de possuir boas métricas de tempo, _Second Chance_ não possui as melhores assertividades - em termos de quantidade de _hits_ - entre as estratégias de _cache_ para _workloads_ periódicos. Isso ocorre pois apesar de considerar a recência de acesso e busca, o mecanismo priorização de elementos recentes é mais primitivo do que aqueles de políticas como _LRU_, por exemplo.
+
+#### Tempo médio de _miss_
+Quando se trata de tempo médio de _miss_, _Second Chance_ acumula boas métricas. Seus dados reforçam, ainda o comportamento de _**O(1)**_ amortizado que constitui sua operação de _miss_. Sendo assim, obersva-se novamente o comportamento curvo do gráfico, com médias de tempos maiores em _workloads_ de menor comprimento, já que, nessas cargas de teste, os "_**O(n)**_" eventuais analisados sobem a média geral de tempo. O gráfico a seguir exemplifica essa situação:
+
+![Texto alternativo](../../../../../../../data/graphs/miss_time_graphs/periodic/second_chance_time_graph.png)
