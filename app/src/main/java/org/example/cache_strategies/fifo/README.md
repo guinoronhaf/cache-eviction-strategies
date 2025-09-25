@@ -6,6 +6,10 @@
 ## _FIFO_ como estratégia de _cache_
  Uma vez que o objetivo de um dispositivo _cache_ é diminuir o desperdício de tempo no ato de recuperar um dado requerido, a estratégia FIFO permite que a máquina armazene, em prontidão, os dados mais recentes por ordem de chegada. No caso de se ocupar todo o espaço do cache, serão sobrescritos os valores mais antigos. 
 
+## Implementação da _FIFO Strategy_ neste projeto
+
+ 
+
 ## Desempenho da estratégia _FIFO_
 
 ### Randomic Workload
