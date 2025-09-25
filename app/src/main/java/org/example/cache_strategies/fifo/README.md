@@ -10,7 +10,7 @@
 
  
 
-## Desempenho da estratégia _FIFO_
+## Desempenho 
 
 ### Randomic Workload
 
