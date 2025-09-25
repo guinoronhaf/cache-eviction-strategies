@@ -35,4 +35,4 @@ No que tange à quantidade de _hits_ em _workloads randômicos, _Second Chance_ 
 
 O gráfico a seguir retrata a comparação das quantidades de _hits_ por **política de _cache_** em _workloads_ totalmente randômicos:
 
-![Texto alternativo](../../../../../../../data/graphs/hit_graphs/general_randomic_hit_graph-1.png)
+![Texto alternativo](../../../../../../../data/graphs/hit_graphs/general_randomic_hit_graph.png)
