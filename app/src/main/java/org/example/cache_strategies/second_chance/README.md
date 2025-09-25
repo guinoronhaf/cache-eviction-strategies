@@ -146,3 +146,36 @@ De forma conclusiva, apesar de possuir boas métricas de tempo, _Second Chance_ 
 Quando se trata de tempo médio de _miss_, _Second Chance_ acumula boas métricas. Seus dados reforçam, ainda o comportamento de _**O(1)**_ amortizado que constitui sua operação de _miss_. Sendo assim, obersva-se novamente o comportamento curvo do gráfico, com médias de tempos maiores em _workloads_ de menor comprimento, já que, nessas cargas de teste, os "_**O(n)**_" eventuais analisados sobem a média geral de tempo. O gráfico a seguir exemplifica essa situação:
 
 ![Texto alternativo](../../../../../../../data/graphs/miss_time_graphs/periodic/second_chance_time_graph.png)
+
+### _Spike workload_
+#### Quantidade de _hits_
+Nesse tipo de _workload_, _Second Chance_, e as outras políticas também, atingem seu melhor desempenho em relação à quantidade de _hits_. Para efeito de comparação, em um _workload_ de picos de 500.000 elementos, _Second Chance_ atinge pouco menos de **100.000** _hits_. Isso é quase **100** vezes maior do que a quantidade de _hits_ obtidos por essa mesma política em um _workload_ periódico de comprimento semelhante. Aqui vai uma exemplificação gráfica para a quantidade de _hits_ de _Second Chance_ em _workloads_ de picos:
+
+
+![Texto alternativo](../../../../../../../data/graphs/hit_graphs/spike/second_chance_hit_graph.png)
+
+#### Tempo médio de _hits_
+Aqui a análise estatística fica interessante. Seguindo a lógica do tempo médio de _hit_ para _workloads_ periódicos, era de se esperar que o pico de tempo no começo do gráfico de tempo médio de _hit_ para _Second Chance_ com **picos** fosse **maior**, certo? **NÃO!** O que temos aqui não é que a quantidade de _hits_ em _spike_ é maior. Ela é **muito** maior. Isso significa que, na prática, apesar de existirem mais _hits_ que destoam da complexidade padrão esperada, a quantidade de "_hits_ comuns" é tão elevada que suprime quaisquer tentativas de elevação brusca e acentuada da média. Consideremos que:
+
+```diff
+      Tmedio = Ttotal
+              ────────
+                hits             
+```
+
+Isso significa que se _**hits**_ aumenta de forma demasiada, _Tmedio_ acaba caindo.
+
+Aqui está a representação gráfica:
+
+![Texto alternativo](../../../../../../../data/graphs/hit_time_graphs/spike/second_chance_time_graph.png)
+
+Percebe-se que o pico ainda existe, mas com médias de tempo **substancialmente menores**.
+
+#### Tempo médio de _miss_
+Nessa análise, a escolha da estrutura de dados _Array_ faz toda a diferença. É sabido que, ao inicializar um _Array_ de _x_ posições, por exemplos, são alocadas _x_ posições **contíguas**, isto é, contínuas/consecutivas, na memória.
+
+![Texto alternativo](https://ifrnead.github.io/rubynapratica/assets/images/estrutura-array.png)
+
+Tal característica permite ao _Array_ ser uma estrutura naturalmente **indexada**, de modo que é possível acessar uma posição arbitrária em tempo constante, _**O(1)**_, já que é necessário apenas uma operação de soma para isso. Dessa forma, é razoável assumir que sair de uma posição do _Array_ para outra qualquer possui complexidade também costante, já que, mais uma vez, apenas uma operação aritmética é requerida.
+
+Fazendo um paralelo agora, em uma _Linked List_, que não é naturalmente indexada, o acesso arbitrário de _**O(n)**_, já que, no pior caso, itera-se sobre todos os 
