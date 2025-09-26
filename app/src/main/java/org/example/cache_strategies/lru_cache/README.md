@@ -10,9 +10,9 @@
  - [Autor](#autor)
  
 ## Definição
-A política de cache LRU (Least Recently Used) é uma estratégia de substituição de _cache_ baseada no princípio da localidade temporal, onde dados acessados recentemente possuem maior probabilidade de serem reutilizados em um futuro próximo.
+A política de cache _LRU (Least Recently Used)_ é uma estratégia de substituição de _cache_ baseada no princípio da localidade temporal, onde dados acessados recentemente possuem maior probabilidade de serem reutilizados em um futuro próximo.
 
-Como o nome sugere, quando a memória _cache_ está cheia, a LRU escolhe os dados usados menos recentemenete e os remove para liberar espaço para os novos dados. A prioridade dos dados no cache muda de acordo com a necessidade desses dados, ou seja, se alguns dados forem buscados ou atualizados recentemenete, a prioridade desses dados será alterada e atribuída à prioridade mais alta, e a prioridade dos dados diminui se permanecerem sem operações de uso após um período.
+Como o nome sugere, quando a memória _cache_ está cheia, a _LRU_ escolhe os dados usados menos recentemenete e os remove para liberar espaço para os novos dados. A prioridade dos dados no cache muda de acordo com a necessidade desses dados, ou seja, se alguns dados forem buscados ou atualizados recentemenete, a prioridade desses dados será alterada e atribuída à prioridade mais alta, e a prioridade dos dados diminui se permanecerem sem operações de uso após um período.
 
 ### Características FUndamentais:
 
