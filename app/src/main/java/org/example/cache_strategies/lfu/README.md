@@ -1,4 +1,4 @@
-## ANÁLISE DA POLÍTICA LFU (Least Frequently Used)
+## LFU Eviction Strategy
 
   - [Definição](#definição)
   - [_LFU como estratégia de cache_](#LFU-como-Estratégia-de-Cache)
@@ -24,7 +24,7 @@ Para implementar o LFU de forma eficiente,nessa implementação, é utilizado um
 - Outro HashMap (freqListMap) onde a chave é a frequência de acesso e o valor é uma LinkedList que agrupa todos os itens com a mesma frequência.
 
 ```Java
-     public class LfuCache<T> {
+public class LfuCache<T> {
 
     private final static int CAPACITY_DEFAULT = 10;
     private final int capacity;
@@ -37,7 +37,7 @@ Para implementar o LFU de forma eficiente,nessa implementação, é utilizado um
         this.minFrequency = 0;
         this.freqMap = new HashMap<>();
         this.freqListMap = new HashMap<>();
-    } 
+  } 
  ``` 
 Essa arquitetura permite uma gestão muito eficiente dos itens. Quando um item é acessado (get), sua frequência é atualizada no freqMap. Em seguida, ele é removido da LinkedList de sua frequência anterior e adicionado à frente da LinkedList de sua nova frequência (incrementada).Quando um novo item é inserido (put) e o cache já está cheio, a busca pelo item a ser removido (getNextEviction) se torna muito eficiente. O cache mantém uma variável minFrequency que aponta para a frequência mais baixa de todos os itens no cache. O item a ser removido é o último elemento da LinkedList correspondente a essa minFrequency.
 
@@ -100,16 +100,16 @@ A principal vantagem dessa implementação do LFU é sua capacidade de lidar com
 - O método **getNextEviction()** também é eficiente, pois o item a ser removido está sempre no final da LinkedList associada à minFrequency, tornando a operação **O(1)**.
 
 ```Java
-     public T getNextEviction(){
-    if (this.freqMap.isEmpty()) {
-        return null; 
-    }
-    LinkedList<T> minFrenquencyList = this.freqListMap.get(minFrequency);
-    if (minFrenquencyList != null && !minFrenquencyList.isEmpty()) {
-        return minFrenquencyList.getLast();
-    }
-    return null;
+    public T getNextEviction(){
 
+        if (this.freqMap.isEmpty()) {
+            return null; 
+        }
+        LinkedList<T> minFrenquencyList = this.freqListMap.get(minFrequency);
+        if (minFrenquencyList != null && !minFrenquencyList.isEmpty()) {
+            return minFrenquencyList.getLast();
+        }
+        return null;
 
     }
 ```  
