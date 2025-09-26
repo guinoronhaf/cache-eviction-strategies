@@ -4,7 +4,7 @@
  Suponha que você vá a um banco e, para ser atendido, haja uma fila de espera. A convenção do que deve acontecer nessa situação é bem conhecida: quem está há mais tempo esperando será atendido primeiro, ou seja, respeita-se uma ordem de chegada. É essa lógica que uma estrutura de dados FIFO (First In, First Out (o primeiro a chegar é o primeiro a sair)) segue. No contexto do design e da produção de _caches_, a lógica FIFO se apresenta como boa solução para certos desafios apresentados e, dessa forma, tem papel relevante no mercado de memória rápida.
 
 ## _FIFO_ como estratégia de _cache_
- Uma vez que o objetivo de um dispositivo _cache_ é diminuir o desperdício de tempo no ato de recuperar um dado requerido, a estratégia FIFO permite que a máquina armazene, em prontidão, os dados mais recentes por ordem de chegada. No caso de se ocupar todo o espaço do cache, serão sobrescritos os valores mais antigos. 
+ Uma vez que o objetivo de um dispositivo _cache_ é diminuir o desperdício de tempo no ato de recuperar um dado requerido, a estratégia FIFO permite que a máquina armazene, em prontidão, os dados mais recentes por ordem de chegada. Como será mostrado abaixo, esse princípio próprio da lógica FIFO terá pontos fortes e pontos críticos, que se sobressaem conforme o uso escolhido para o cache.
 
 ## Implementação da _FIFO Strategy_ neste projeto
  Para o estudo da _FIFO Eviction Strategy_, foi utilizada, nesse material, a implementação de um cache baseado em uma fila circular (ou seja, quando a estrutura atinge sua capacidade máxima, a solicitação de armazenamento de novos dados implica na sobrescrição dos valores mais antigos). A circularidade dessa implementação pode ser explicitada com base no método addLast (função comum a implementações de filas):
@@ -22,7 +22,7 @@ public void addLast(T valor) {
     }
 }
 ```
- Percebe-se que, quando a fila está cheia, "alguém" deve dar espaço para o novo elemento, e a escolha é pela remoção do valor mais antigo
+ Agora, a exemplificação em código de que, quando a fila está cheia, "alguém" deve dar espaço para o novo elemento, e a escolha é pela remoção do valor mais antigo
 
  Dessa forma, uma vez que esta implementação de memória rápida está baseada na estrutura de dados citada, será comum à ela o comportamento assintótico de uma fila. Isso quer dizer que, no caso da busca de um elemento, por exemplo, a complexidade é O(n), ou seja, deve-se percorrer até n elementos de uma fila de tamanho 'n' para finalizar o método de _search_. É interessante ter conhecimento do custo do método _search_ em específico, uma vez que a confirmação de um hit ou de um miss passa por uma busca do valor na estrutura (ou seja, esse custo será determinante para o desempenho da política FIFO).
 
