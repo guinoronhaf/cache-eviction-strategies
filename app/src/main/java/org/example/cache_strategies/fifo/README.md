@@ -65,7 +65,7 @@ Rotina de busca de um elemento materializada a partir do método indexOf que, em
  Aqui, houve um acompanhamento da tendência observada no gráfico do desempenho com a carga randômica de dados.
  
 ### Miss Time
-  A partir da análise dos dados computados nesse projeto, um padrão se mostra claro: a _FIFO Strategy_ leva larga desvantagem frente as demais estratégias de cache abordadas nesse material quanto ao tempo médio para um 'Miss'. O gŕafico conjunto do 'Miss time' para a carga de dados randõmica assinala a ineficiência temporal da FIFO quanto à competência dos *misses*. E, bom, isso têm fundamentação algorítmica: foi dito, neste documento, acima, que a implementação do cache acompanharia os comportamentos assintóticos de uma fila circular e, como o método _search_ necessário para confirmar um 'miss' é O(n), temos um grande custo constante na rotina de um _miss_.
+  A partir da análise dos dados computados nesse projeto, um padrão se mostra claro: a _FIFO Strategy_ leva larga desvantagem frente as demais estratégias de cache abordadas nesse material quanto ao tempo médio para um _miss_. O gŕafico conjunto do _miss time_ para a carga de dados randõmica assinala a ineficiência temporal da FIFO quanto à competência dos *misses*. E, bom, isso têm fundamentação algorítmica: foi dito, neste documento, acima, que a implementação do cache acompanharia os comportamentos assintóticos de uma fila circular e, como o método _search_ necessário para confirmar um 'miss' é O(n), temos um grande custo constante na rotina de um _miss_.
 
   #### Carga randômica de dados
 
@@ -73,6 +73,9 @@ Rotina de busca de um elemento materializada a partir do método indexOf que, em
 
   Aqui, constata-se o grande ponto fraco desta política enquanto solução para caches: o alto custo da rotina de busca. Perceba que, enquanto três das outras quatro _cache strategies_ abordadas neste material têm eficiência praticamente O(1), _FIFO Strategy_ assume uma grande desvantagem e se mostra a pior implementação neste prisma.
 
+#### Cargas Spike e Periódica
+
+As estatísticas da política, no contexto do _miss time_, para essas cargas de dados, foram praticamente um "espelho" do que foi apresentado para a carga randômica de dados - uma indicação de que a maior determinante para a eficiência da _FIFO Strategy_ nessa competência foi, de fato, a rotina iterativa de busca do elemento para confirmar o _miss_. 
 
 ## Conclusão
  A maior valência de um cache que segue a lógica 'First In First Out' é a simplicidade de sua implementação, o que resulta em um equipamento físico - hardware - acessível e de engenharia proporcionalmente simples. Nesse sentido, a FIFO Strategy se vê útil e sobressalente para problemas que demandem previsibilidade e praticidade e, não necessariamente, a taxa de 'hits' mais alta. Uma estratégia com essas qualidades implica em menos transistores dedicados, por exemplo, além de menor área ocupada no chip e provável menor gasto de energia. 
