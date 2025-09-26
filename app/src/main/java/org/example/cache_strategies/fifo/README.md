@@ -8,6 +8,11 @@
 
 ## Implementação da _FIFO Strategy_ neste projeto
 
+'''Java
+public static void main(String[] args) {
+
+}
+'''
  
 
 ## Desempenho 
