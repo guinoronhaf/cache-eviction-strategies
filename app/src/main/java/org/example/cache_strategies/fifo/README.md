@@ -26,6 +26,22 @@ public void addLast(T valor) {
 
  Dessa forma, uma vez que esta implementação de memória rápida está baseada na estrutura de dados citada, será comum à ela o comportamento assintótico de uma fila. Isso quer dizer que, no caso da busca de um elemento, por exemplo, a complexidade é O(n), ou seja, deve-se percorrer até n elementos de uma fila de tamanho 'n' para finalizar o método de _search_. É interessante ter conhecimento do custo do método _search_ em específico, uma vez que a confirmação de um hit ou de um miss passa por uma busca do valor na estrutura (ou seja, esse custo será determinante para o desempenho da política FIFO).
 
+ ```Java
+ public int indexOf(T value) {
+        int count = 0;
+        while(count < this.size) {
+            if(this.fila[(this.head + count) % this.fila.length].equals(value)) {
+                return (this.head + count) % this.fila.length;
+            } else {
+                count++;
+            }
+        }
+        return -1;
+    }
+```
+
+Rotina de busca de um elemento materializada a partir do método indexOf que, em poucas palavras, retorna o índice do elemnento caso ele tenha sido encontrado. Implica-se então que, para um elemento não encontrado, o método retorna uma sinalização de 'miss' = (-1)
+
 ## Desempenho 
 
 ### Randomic Workload
