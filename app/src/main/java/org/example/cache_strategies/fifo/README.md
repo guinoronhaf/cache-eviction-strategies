@@ -7,10 +7,20 @@
  Uma vez que o objetivo de um dispositivo _cache_ é diminuir o desperdício de tempo no ato de recuperar um dado requerido, a estratégia FIFO permite que a máquina armazene, em prontidão, os dados mais recentes por ordem de chegada. No caso de se ocupar todo o espaço do cache, serão sobrescritos os valores mais antigos. 
 
 ## Implementação da _FIFO Strategy_ neste projeto
-
+ Para o estudo da _FIFO Eviction Strategy_, foi utilizado, nesse material, a implementação de um cache baseado em uma fila circular (ou seja, quando a estrutura atinge sua capacidade máxima, a solicitação de armazenamento de novos dados implica na sobrescrição dos valores mais antigos). A circularidade dessa implementação pode ser explicitada com base no método addLast - métoodo comum a implementações de filas: 
 ```Java
-public static void main(String[] args) {
-
+public void addLast(T valor) {
+        // Percebe-se que, quando a fila está cheia, "alguém" deve dar espaço para o novo elemento, e a escolha é pela remoção do valor mais antigo
+        if(isFull()) {
+            removeFirst();
+        }
+        if(this.size == 0) {
+            this.head++;
+        }
+        this.tail = (this.tail + 1) % this.fila.length;
+        this.fila[this.tail] = valor;
+        this.size++;
+    }
 }
 ```
  
