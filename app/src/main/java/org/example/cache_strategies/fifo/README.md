@@ -98,6 +98,6 @@ As estatísticas da política, no contexto do _miss time_, para essas cargas de 
   Em *sistemas embarcados* (de forma simples, "subcomputadores" que têm a finalidade de executar tarefas específicas dentro de outro dispositivo), em virtude do caráter auxiliar do sistema e da necessidade de otimizar, ao máximo, custos de produção para que o produto seja viável industrialmente, uma das melhores soluções disponíveis a baixo custo é a implementação de uma memória rápida que utiliza FIFO para a tomada de decisão de armazenamento/adição/exclusão de dados. Uma materialização dessa aplicação, por exemplo, seria um microcontrolador, dentro de um roteador móvel doméstico: a memória do _modem_ é limitada e, portanto, faz-se necessário escolher, quando há muitos pacotes de dados vindos da origem, quais pacotes manter e enviar, de fato, ao computador. É aí que a lógica FIFO entra em cena, resolvendo de forma simples e, principalmente, de modo economicamente viável.
 
 ## Autor
-Victor França [@victorfrancacg](github.com/victorfrancacg)
+Victor França [@victorfrancacg](https://github.com/victorfrancacg)
 
 Este arquivo integra o projeto final da disciplina de Estrutura de Dados e Algoritmos (2025.1), do curso de Ciência da Computação da Universidade Federal de Campina Grande (UFCG).
