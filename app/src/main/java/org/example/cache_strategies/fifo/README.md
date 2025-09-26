@@ -42,6 +42,8 @@ public void addLast(T valor) {
 
   ![Tempo médio de miss da FIFO para workload randômico](../../../../../../../data/graphs/miss_time_graphs/general_randomic_time_graph.png)
 
+  Aqui, constata-se o grande ponto fraco desta política enquanto solução para caches: o alto custo da rotina de busca. Perceba que, enquanto três das outras quatro _cache strategies_ abordadas neste material têm eficiência praticamente O(1), _FIFO Strategy_ assume uma grande desvantagem e se mostra a pior implementação neste prisma.
+
 ### Periodic Workload
 
 #### Hit Time
