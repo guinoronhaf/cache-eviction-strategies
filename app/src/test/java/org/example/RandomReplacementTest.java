@@ -1,8 +1,10 @@
-package org.example.cache_strategies.random_replace;
+package org.example;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.example.cache_strategies.random_replacement.RandomReplaceEvictionStrategy;
 
 /**
  * Testes unitários para a classe RandomReplaceEvictionStrategy.
@@ -10,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Cobre os casos de inserção, hit/miss, capacidade máxima, substituição aleatória,
  * obtenção do próximo elemento a ser removido e representação em string.
  */
-class RandomReplaceTest {
+class RandomReplacementTest {
 
     /** Instância do cache utilizada nos testes. */
     private RandomReplaceEvictionStrategy<String> cache;

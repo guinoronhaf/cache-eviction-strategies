@@ -131,7 +131,7 @@ Por outro lado, é de extrema importância pontuar o impacto de cada uma das est
   
   3. [*LRU (Least Recently Used)*](./app/src/main/java/org/example/cache_strategies/lru_cache/README.md)
 
-  4. [*Random Replacement*](./app/src/main/java/org/example/cache_strategies/random_replace/README.md)
+  4. [*Random Replacement*](./app/src/main/java/org/example/cache_strategies/random_replacement/README.md)
   
   5. [*Second Chance (Clock)*](./app/src/main/java/org/example/cache_strategies/second_chance/README.md)
 

@@ -7,27 +7,20 @@ import java.io.InputStreamReader;
 import org.example.cache_strategies.fifo.FIFOEvictionStrategy;
 import org.example.cache_strategies.lfu.LfuCacheEvictionStrategy;
 import org.example.cache_strategies.lru_cache.LRUCacheEvictionStrategy;
-import org.example.cache_strategies.random_replace.RandomReplaceEvictionStrategy;
+import org.example.cache_strategies.random_replacement.RandomReplaceEvictionStrategy;
 import org.example.cache_strategies.second_chance.SecondChanceEvictionStrategy;
 import org.example.cache_strategies.util.CacheEvictionStrategy;
 
 /**
- * Classe responsável por analisar a performance de tempo de cada política de cache
- * a partir de um workload vindo da entrada-padrão.
+ * Classe responsável por gerar outputs de tempo médio para cada política de cache a partir de um arquivo de input.
  *
- * A saída é formatada para conter três colunas:
- * CacheSize AverageHitTime(ns) AverageMissTime(ns)
- *
- * [MODO DE USO]
- * 1 - Compile o projeto.
- * 2 - Execute a classe passando o nome da política como argumento e o arquivo de workload
- * na entrada-padrão.
- *
- * Exemplo de comando:
- * gradle runMainPerformance --quiet --args="fifo" < app/data/input/spike_input_50000.txt
- *
- * OBS.: atenção para o --quiet no comando gradle para uma saída limpa.
+ * @author Artur (Github: ArturALW)
+ * @author Brunno (Github: Brunnowxl)
+ * @author Guilherme (Github: guinoronhaf)
+ * @author Victor França (Github: victorfrancacg)
+ * @author Vitor Hugo (Github: vitorh333)
  */
+
 public class MainPerformance {
 
     private static final String FIFO_CACHE = "fifo";
@@ -36,7 +29,6 @@ public class MainPerformance {
     private static final String RANDOM_CACHE = "random_replacement";
     private static final String SECOND_CHANCE_CACHE = "second_chance";
 
-    // A capacidade do cache pode ser ajustada aqui.
     private static final int CACHE_CAPACITY = 10000;
 
     public static void main(String[] args) {
@@ -73,13 +65,10 @@ public class MainPerformance {
             int hitCounter = 0;
             int missCounter = 0;
 
-            // Usamos 'long' para acumular o tempo total em nanosegundos e evitar overflow.
             long totalHitTime = 0;
             long totalMissTime = 0;
 
-            // Loop principal que processa cada linha do workload
             while ((line = reader.readLine()) != null) {
-                // Remove espaços em branco que possam existir na linha
                 String trimmedLine = line.trim();
                 if (trimmedLine.isEmpty()) {
                     continue; // Pula linhas vazias
@@ -102,15 +91,11 @@ public class MainPerformance {
                 }
             }
             
-            // Calcula o tempo médio, tratando o caso de divisão por zero.
-            // O resultado é em nanosegundos (ns).
             double averageHitTime = (hitCounter > 0) ? (double) totalHitTime / hitCounter : 0.0;
             double averageMissTime = (missCounter > 0) ? (double) totalMissTime / missCounter : 0.0;
 
-            // Calcula o tamanho total do workload, a partir da soma entre as quantidades de hit e miss.
             int workloadLength = hitCounter + missCounter;
 
-            // Imprime a saída no formato: [tamanho_do_cache] [tempo_medio_hit] [tempo_medio_miss]
             System.out.println(cacheStrategy + " " + workloadLength + " " + CACHE_CAPACITY + " " + averageHitTime + " " + averageMissTime);
 
         } catch (IOException e) {

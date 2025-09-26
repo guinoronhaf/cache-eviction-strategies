@@ -7,26 +7,18 @@ import java.io.InputStreamReader;
 import org.example.cache_strategies.fifo.FIFOEvictionStrategy;
 import org.example.cache_strategies.lfu.LfuCacheEvictionStrategy;
 import org.example.cache_strategies.lru_cache.LRUCacheEvictionStrategy;
-import org.example.cache_strategies.random_replace.RandomReplaceEvictionStrategy;
+import org.example.cache_strategies.random_replacement.RandomReplaceEvictionStrategy;
 import org.example.cache_strategies.second_chance.SecondChanceEvictionStrategy;
 import org.example.cache_strategies.util.CacheEvictionStrategy;
 
 /**
- * Classe responsável por devolver os dados de hit de cada política a partir de um arquivo
- * .txt vindo da entrada-padrão.
+ * Classe responsável por gerar outputs para a quantidade de hits de cada política.
  *
- * [MODO DE USO]
- * 1 - caso sua política ainda não possua um diretório próprio em app/data/output/, crie um.
- * 2 - em cada um desses subdiretórios próprios, deve existir três arquivos .data: randomic_output, periodic_output e spike_output.
- * 3 - em cada um dos três arquivos criados, deve existir um cabeçalho para ajudar no plot dos gráficos:
- *      
- *      cacheStrategy WorkloadLength Hits
- *
- * 4 - para cada um dos inputs.txt, execute esse arquivo .java com o .txt entrada padrão e direcione para o output adequado, passando o nome da sua política como parâmetro.
- *
- *      gradle runMainWorkload --quiet --args="fifo" < app/data/input/spike_input_50000.txt >> app/data/output/fifo/spike_output.data
- *
- *  OBS.: atenção para o --quiet no comando gradle e no ">>" e não ">".
+ * @author Artur (Github: ArturALW)
+ * @author Brunno (Github: Brunnowxl)
+ * @author Guilherme (Github: guinoronhaf)
+ * @author Victor França (Github: victorfrancacg)
+ * @author Vitor Hugo (Github: vitorh333)
  */
 public class MainWorkload {
 
