@@ -35,8 +35,12 @@ public void addLast(T valor) {
 
  ![Tempo médio de hit da FIFO para workload randômico](../../../../../../../data/graphs/hit_time_graphs/general_randomic_time_graph.png)
 
+ Custo de tempo da FIFO está acima de três políticas e, no entanto, bem abaixo do custo da _LFU Strategy_.
+
 #### Miss Time
-  A partir da análise dos dados computados nesse projeto, um padrão se mostra claro: a _FIFO Strategy_ leva larga desvantagem frente as demais estratégias de cache abordadas nesse material quanto ao tempo médio para um 'Miss'. O gŕafico conjunto do 'Miss time' para a carga de dados randõmica assinala a ineficiência temporal da FIFO quanto à competência dos *misses*.
+  A partir da análise dos dados computados nesse projeto, um padrão se mostra claro: a _FIFO Strategy_ leva larga desvantagem frente as demais estratégias de cache abordadas nesse material quanto ao tempo médio para um 'Miss'. O gŕafico conjunto do 'Miss time' para a carga de dados randõmica assinala a ineficiência temporal da FIFO quanto à competência dos *misses*. E, bom, isso têm fundamentação algorítmica: foi dito, neste documento, acima, que a implementação do cache acompanharia os comportamentos assintóticos de uma fila circular e, como o método _search_ necessário para confirmar um 'miss' é O(n), temos um grande custo constante na rotina de um _miss_.
+
+  ![Tempo médio de miss da FIFO para workload randômico](../../../../../../../data/graphs/miss_time_graphs/general_randomic_time_graph.png)
 
 ### Periodic Workload
 
