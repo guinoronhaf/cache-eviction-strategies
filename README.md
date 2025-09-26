@@ -81,15 +81,15 @@ Dentro do contexto de cada **estratégia de cache**, é possível analisar tanto
 
 ## Estratégias abordadas nesse material
 
-  1. *FIFO (First-in First-Out)*
+  1. [*FIFO (First-in First-Out)*](./app/src/main/java/org/example/cache_strategies/fifo/README.md)
 
-  2. *LFU (Least Frequently Used)*
+  2. [*LFU (Least Frequently Used)*](./app/src/main/java/org/example/cache_strategies/lfu/README.md)
   
-  3. *LRU (Least Recently Used)*
+  3. [*LRU (Least Recently Used)*](./app/src/main/java/org/example/cache_strategies/lru_cache/README.md)
 
-  4. *Random Replacement*
+  4. [*Random Replacement*](./app/src/main/java/org/example/cache_strategies/random_replace/README.md)
   
-  5. *Second Chance (Clock)*
+  5. [*Second Chance (Clock)*](./app/src/main/java/org/example/cache_strategies/second_chance/README.md)
 
 ## _Workloads_
 É importante destacar que as análises quantitativa e qualitativa passam sobretudo pela geração de cargas de elementos que reflitam o _stress_ gerado por dados reais em aplicações complexas. Dessa forma, visando simular cargas reais de dados para as estratégias de _cache_, é possível gerar _workloads_ específicos que reflitam cenários distintos, expondo as políticas de _cache_ a cargas desafiadoras.
