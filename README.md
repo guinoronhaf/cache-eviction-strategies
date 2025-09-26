@@ -20,7 +20,7 @@
 
 ## Metodologia
 ### Estrutura de projeto
-Foi utilizado [_**gradle**_](https://gradle.org/) como ferramenta para organizar a estrutura de nosso projeto, além de gerenciar dependências. Além disso, fizemos uso desse sistema para gerar _gradle tasks_ que compilam e executam códigos _Java_ a partir de arquivos de _input_ vindos da entrada padrão. Aqui está um exemplo de nossas _tasks_ geradas via _Gradle_:
+Foi utilizado [_**gradle**_](https://gradle.org/) como ferramenta para organizar a estrutura de nosso projeto, além de gerenciar dependências. Além disso, fizemos uso desse sistema para gerar _gradle tasks_ que compilam e executam códigos _Java_ a partir de arquivos de _input_ oriundos da entrada padrão. Aqui está um exemplo de nossas _tasks_ geradas via _Gradle_:
 
 ```gradle
 tasks.register("runMainWorkload", JavaExec) {
