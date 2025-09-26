@@ -31,7 +31,9 @@ public void addLast(T valor) {
 ### Randomic Workload
 
 #### Hit Time
- Pode-se tirar a seguinte conclusão dos gráficos de 'Hit time' da _FIFO Eviction Strategy_: Temos um tempo médio de hit menor do que o de um miss - o que era, a priori, esperado, já que para confirmarmos um hit nem sempre precisamos percorrer toda a estrutura e, no _Miss_, há a necessidade disso. Comparativamente as outras políticas testadas, a FIFO Strategy teve um desempenho mediocre no 'Hit Time' para a carga de dados randômicas. 
+ Pode-se tirar a seguinte conclusão dos gráficos de 'Hit time' da _FIFO Eviction Strategy_: Temos um tempo médio de hit menor do que o de um miss - o que era, a priori, esperado, já que para confirmarmos um hit nem sempre precisamos percorrer toda a estrutura e, no _Miss_, há a necessidade disso. Comparativamente as outras políticas testadas, a FIFO Strategy teve um desempenho mediocre no 'Hit Time' para a carga de dados randômicas, como pode ser observado no gráfico abaixo.
+
+ [Tempo médio de hit da FIFO para workload randômico](../../../../../../../data/graphs/hit_time_graphs/randomic/fifo_time_graph.png)
 
 #### Miss Time
   A partir da análise dos dados computados nesse projeto, um padrão se mostra claro: a _FIFO Strategy_ leva larga desvantagem frente as demais estratégias de cache abordadas nesse material quanto ao tempo médio para um 'Miss'. O gŕafico conjunto do 'Miss time' para a carga de dados randõmica assinala a ineficiência temporal da FIFO quanto à competência dos *misses*.
