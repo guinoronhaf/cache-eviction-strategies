@@ -40,7 +40,7 @@ public void addLast(T valor) {
     }
 ```
 
-Rotina de busca de um elemento materializada a partir do método indexOf que, em poucas palavras, retorna o índice do elemnento caso ele tenha sido encontrado. Implica-se então que, para um elemento não encontrado, o método retorna uma sinalização de 'miss' = (-1)
+Rotina de busca de um elemento materializada a partir do método indexOf que, em poucas palavras, retorna o índice do elemnento caso ele tenha sido encontrado. Implica-se então que, para um elemento não encontrado, o método retorna uma sinalização de _miss_ (-1).
 
 ## Desempenho 
 
