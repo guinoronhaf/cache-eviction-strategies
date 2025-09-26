@@ -17,7 +17,7 @@ Em sistemas operacionais de memória virtual, é preciso, por vezes, recuperar d
 
 O processo de **paginação**, ou _swapping_, permite que, uma vez que um dado/página para o qual não existe referência na memória principal é requerido, uma exceção do tipo "falha de página" é lançada, e assim busca-se pela página na memória secundária, trazendo-a para o armazenamento principal.
 
-Entretanto, é sabido que a memória _RAM_, apesar de possuir acesso rápido, é bastante limitada em relação à memória secundária, o que gera a necessidade de otimizar o espaço existente com páginas que possam ser re-acessadas com maior frequência. Nesse sentido, surgem estratégias/algoritmos de _page replacement_ que buscam, a princípio, diminuir a quantidade de _page faults_ - a necessidade de buscar páginas na memória secundária - e promover maior eficiência em termos de complexidade algorítmica e computacional. Uma delas é chamada de _Second Chance_.
+Entretanto, é sabido que a memória _RAM_, apesar de possuir acesso rápido, é bastante limitada em relação à memória secundária, o que gera a necessidade de otimizar o espaço existente com páginas que possam ser reacessadas com maior frequência. Nesse sentido, surgem estratégias/algoritmos de _page replacement_ que buscam, a princípio, diminuir a quantidade de _page faults_ - a necessidade de buscar páginas na memória secundária - e promover maior eficiência em termos de complexidade algorítmica e computacional. Uma delas é chamada de _Second Chance_.
 
 ## _Second Chance_ como estratégia de _cache_
 É importante perceber que a utilização da estratégia de _Second Chance_ não se restringe apenas a sistemas operacionais que fazem uso de memória virtual. Nesse cenário, é possível adotar essa política para contextos gerais de _cache_, em que busca-se acesso rápido ao buscar elementos que, a princípio, estariam alocados em uma memória de acesso mais lento.
@@ -236,6 +236,8 @@ Isso explica a vantagem leve de _Second Chance_ em relação a outras estratégi
 
 ## Conclusão
 Conclui-se, portanto, que a estratégia de _Second Chance_ constitui uma política consideravelmente boa em cenários em que requer-se um algoritmo simples e fácil de implementar e manter, além de ser uma estratégia que considera recência e frequência, ainda que de formas primitivas. É válido destacar, ainda, que para _workloads_ com picos de acesso, como processos repetidamente executados de forma abrupta, ou um _site_ acessado com muita frequência em um dia, _Second Chance_ se sai bem tanto em assertividade (quantidade de _Hits_) quanto em eficiência de tempo, possuindo _Miss Penalty_ e _Overhead_ satisfatórios.
+
+Essa característica torna a política particularmente útil em cenários em que cargas do tipo _spike_, com acessos repentinos e repetitivos, são frequentes. Em tais contextos, o balanço entre simplicidade e desempenho oferecido por _Second Chance_ e mostra vantajoso em comparação a outras estratégias aboradadas em nosso material, como _LRU_ e _Random Replacement_.
 
 Por fim, é válido pontuar que a gama de implementações possíveis para a _Second Chance_ é vasta. Uma delas, conhecida como _**Clock-Pro**_ - que sugere um aprimoramento da implementação _Clock_ - considera a distinção entre _Hot items_ e _Cold items_, o que auxilia no ganho de desempenho do _cache_.
 

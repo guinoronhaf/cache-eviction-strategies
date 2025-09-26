@@ -8,6 +8,8 @@
 
 - [_Cache Eviction_](#cache-eviction)
 
+- [Modo de análise](#modo-de-análise)
+
 - [Estratégias abordadas nesse material](#estratégias-abordadas-nesse-material)
 
 - [Indicadores *hit* e *miss*](#indicadores-hit-e-miss)
@@ -18,7 +20,7 @@
 
 ## Metodologia
 ### Estrutura de projeto
-Foi utilizado [_**gradle**_](https://gradle.org/) como ferramenta para organizar a estrutura de nosso projeto, além de gerenciar dependências. Além disso, fizemos uso desse sistema para gerar _gradle tasks_ que compilam e executam códigos _Java_ a partir de arquivos de _input_ vindos da entrada padrão. Aqui é um exemplo de nossas _tasks_ geradas via _Gradle_:
+Foi utilizado [_**gradle**_](https://gradle.org/) como ferramenta para organizar a estrutura de nosso projeto, além de gerenciar dependências. Além disso, fizemos uso desse sistema para gerar _gradle tasks_ que compilam e executam códigos _Java_ a partir de arquivos de _input_ oriundos da entrada padrão. Aqui está um exemplo de nossas _tasks_ geradas via _Gradle_:
 
 ```gradle
 tasks.register("runMainWorkload", JavaExec) {
@@ -38,16 +40,34 @@ tasks.register("runMainPerformance", JavaExec) {
 ```
 
 ### Versionamento de código
-Utilizou-se [_Git_](https://git-scm.com/) e [_Github_](https://docs.github.com/pt) para versionar dados e códigos existentes no projeto. A partir da criação de _issues_ e _branches_, foi possível dividir tarefas e separar responsabilidades, mas mantendo a coletividade do grupo inerente ao projeto.
+Utilizou-se [_Git_](https://git-scm.com/) e [_Github_](https://docs.github.com/pt) para versionar dados e códigos existentes no projeto. A partir da criação de _issues_ e _branches_, foi possível dividir tarefas e separar responsabilidades, ainda que mantendo a coletividade de grupo inerente ao projeto.
 
 ### Geração de _inputs_ (carga de dados)
 Para gerar as cargas de dados, na forma de _workloads_ de naturezas distintas, utilizamos a linguagem [_**Python**_](https://www.python.org/), amplamente conhecida por sua legibilidade, simplicidade e alto nível associado. Assim, cada _script Python_ é responsável pela geração de uma carga/cenário de testes diferentes. Assim, foi possível simular cargas randômicas (_randomic_), periódicas (_perodic_) e de picos (_spike_).
 
 ### Automatizações
-Para automatizar tarefas mecânicas - tal qual a geração de _outputs_ para cada política e cada _workload - utilizou-se _scripts [_Bash_](https://wiki.debian.org/pt_BR/Bash). Através deles, torna-se mais simples a manipulação de resultados de execução entre arquivos dentros dos diretórios do projeto.
+Para automatizar tarefas mecânicas - tal qual a geração de _outputs_ para cada política e cada _workload_ (tópico abordado mais à frente) - utilizou-se _scripts [_Bash_](https://wiki.debian.org/pt_BR/Bash). Através deles, torna-se mais simples a manipulação de resultados de execução entre arquivos dentros dos diretórios do projeto.
 
 ### Plotagem (geração) de gráficos
 Para gerar gráficos a partir de um volume de dados muito grande na forma de arquivos _.data_ que contém um grande volume de dados. Assim, foi utilizado o _software_ de geração de dados gráficos [**R**](https://www.r-project.org/).
+
+### Implementação de classes _EvictionStrategy_
+
+Em nosso projeto, utilizamos um padrão de projeto em que existe uma classe de regula a lógica bruta do _cache_ e outra classe de mais alto nível - que atua como um _Controller_, que istancia a classe de lógica e retorna "_hit_" ou "_miss_" dependendo do contexto.
+
+Visando melhorar legibilidade e modularização, criamos uma _interface_ _**CacheEvictionStrategy**_, que estabelece um contrato comum às classes de alto nível para cada política:
+
+```java
+public interface CacheEvictionStrategy<T> {
+
+    public String get(T value);
+
+    public T getNextEviction();
+
+    public Integer size();
+
+}
+```
 
 ## Estrutura de diretórios
 
@@ -123,6 +143,10 @@ $`MISSmedio =  \frac{MISStotal}{hits}`$
 
 Por outro lado, é de extrema importância pontuar o impacto de cada uma das estruturas de dados utilizadas por uma política com o intuito de analisar o quão preponderante são os efeitos das propriedades das estruturas de dados sobre as estratégias de _cache_. Constrói-se, assim, o conceito geral de _Overhead_ de uma política, o qual permite a observação do desempenho de uma estratégia de _cache_ em seu nível mais interno.
 
+## Modo de análise
+
+Para analisar a eficiência das estratégias de _cache_, optamos por expôr cada uma das políticas a cenários com variações específicas. Sendo assim, buscamos criar cargas de dados variadas, aboradadas com afinco mais à frente, e que reforçam a complexidade de um sistema real. Dessa forma, geramos cargas de dados contendo de **50.000** a **1.000.000** de elementos, com acréscimos de 50.000, em cada um dos cenários de carga. Assim foi possível perceber e analisar o comportamento de cada uma das **Estratégias de _cache_** abordadas abaixo.
+
 ## Estratégias abordadas nesse material
 
   1. [*FIFO (First-in First-Out)*](./app/src/main/java/org/example/cache_strategies/fifo/README.md)
@@ -136,11 +160,15 @@ Por outro lado, é de extrema importância pontuar o impacto de cada uma das est
   5. [*Second Chance (Clock)*](./app/src/main/java/org/example/cache_strategies/second_chance/README.md)
 
 ## _Workloads_
+
 É importante destacar que as análises quantitativa e qualitativa passam sobretudo pela geração de cargas de elementos que reflitam o _stress_ gerado por dados reais em aplicações complexas. Dessa forma, visando simular cargas reais de dados para as estratégias de _cache_, é possível gerar _workloads_ específicos que reflitam cenários distintos, expondo as políticas de _cache_ a cargas desafiadoras.
 
 Apresentaremos um panorama geral de cada um dos _workloads_ a partir de uma definição geral, um exemplo concreto em aplicação real e uma tabela de frequências que refletem o estilo da carga de testes.
 
+Em nosso projeto, foram construídos _workloads_ randômicos, periódicos e de picos (_spikes_).
+
 ### _Randomic workload_
+
 O _workload_ do tipo _randomic_ é formado apenas por dados pseudoaleatórios e buscam simular o tipo de carga mais básica para o _cache_: aquela que não segue nenhum padrão de frequência ou recência de acesso e busca.
 
 ```bash
@@ -177,8 +205,10 @@ frequência | valor
 
 Um _workload_ randômico pode representar situações reais em que o padrão de acesso não segue uma lógica previsível ou periódica, mas sim ocorre de forma dispersa e variável ao longo do tempo. Esse tipo de comportamento é comum em sistemas com usuários humanos, por exemplo em plataformas de streaming, redes sociais ou servidores web, onde cada acesso depende de escolhas individuais e imprevisíveis. Também aparece em cenários de segurança da informação, como ataques de negação de serviço distribuídos (DDoS), nos quais os acessos são aleatórios e massivos. Assim, _workloads_ randômicos são úteis para modelar ambientes com alta incerteza e forte influência de eventos externos.
 
+Do ponto de vista de tempo de execução, _workloads_ puramente randômicos são de extrema importância para compreender a complexidade de execução da operação de _miss_ em uma estratégia de _cache_, já que, pelo fato de existirem poucas repetições na carga (como suguere a tabela de frequências), a quantidade de _misses_ é bastante elevada.
 
 ### _Periodic workload_
+
 O _workload_ periódico é aquele em que a carga de trabalho segue um padrão repetitivo e ocorre em intervalos regulares, sem depender de eventos inesperados. Esse comportamento torna sua execução previsível, permitindo planejar recursos e otimizar desempenho com mais precisão.
 
 ```bash
@@ -222,7 +252,11 @@ frequência | valor
 
 Um exemplo cotidiano desse tipo de _workload_ é a sincronização automática de e-mails, que ocorre em intervalos definidos. Também podemos citar notificações de aplicativos que consultam os servidores a cada poucos minutos para verificar novas mensagens, ou as atualizações de antivírus que seguem um cronograma fixo para buscar novas assinaturas. Esses casos evidenciam cargas que seguem um agendamento técnico pré-estabelecido, ao invés de surgirem de forma aleatória.
 
-### _Spike workload_
+Quando se trata de implementação utilizando _Python_, foi gerada uma sequência aleatória à princípio. Tal sequência é replicada várias vezes no _workload_, alternando-se com cargas aleatórias. Tem-se, assim, repetições periódicas de uma carga de teste, o que configura um _workload_ periódico.
+
+Fundamentalmente, _workloads_ periódicos permitem compreender como as políticas lidam com recência e frequência de elementos cuja busca em _cache_ é **periódica**. Ademais, esse tipo de carga produz um bom balanço entre tempos médios de _hit_ e _miss_, já que alia boas quantidades de acertos (_hits_) com idas à memória secundária (_miss_).
+
+### _Spike workload_ (_workload_ de picos)
 
 _Workloads_ do tipo _spike_ são aqueles em que a demanda é geralmente baixa ou moderada, mas ocasionalmente dispara em picos muito altos por curtos períodos de tempo. Esse comportamento é imprevisível e exige que o sistema consiga lidar com sobrecargas momentâneas sem degradar o desempenho.
 
@@ -258,6 +292,10 @@ frequência | valor
         .
 ```
 Exemplos comuns incluem do _spike_ são acessos a sites de notícias durante acontecimentos importantes, consultas em e-commerces quando um produto entra em promoção relâmpago, ou o aumento repentino de buscas em redes sociais por um assunto viral. Nesses casos, o _workload_ não é constante nem periódico, mas gera picos intensos que podem estressar servidores e sistemas de armazenamento.
+
+Em nossa implementação, com _Python_, selecionamos elementos que vão ser acessados em picos, além de definir o comprimento de cada pico, utilizando valores aleatórios. Posteriormente, alternamos cargas aleatórias com picos de acesso aos valores selecionados.
+
+É válido destacar que _workloads_ de **picos**, em oposição aos randômicos, são fundamentais para entender a complexidade das operações de _hit_ em cada estratégia de _cache_, já que picos de acesso implicam vários _hits_ em sequência. Note que, na tabela de frequências, existem elementos com frequência **1000** e outros com frequência **411**. Tais valores constituem picos de acesso aos elementos associados.
 
 ## Contribuintes
 
