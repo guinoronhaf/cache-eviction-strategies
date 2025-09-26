@@ -51,6 +51,24 @@ Para automatizar tarefas mecânicas - tal qual a geração de _outputs_ para cad
 ### Plotagem (geração) de gráficos
 Para gerar gráficos a partir de um volume de dados muito grande na forma de arquivos _.data_ que contém um grande volume de dados. Assim, foi utilizado o _software_ de geração de dados gráficos [**R**](https://www.r-project.org/).
 
+### Implementação de classes _EvictionStrategy_
+
+Em nosso projeto, utilizamos um padrão de projeto em que existe uma classe de regula a lógica bruta do _cache_ e outra classe de mais alto nível - que atua como um _Controller_, que istancia a classe de lógica e retorna "_hit_" ou "_miss_" dependendo do contexto.
+
+Visando melhorar legibilidade e modularização, criamos uma _interface_ _**CacheEvictionStrategy**_, que estabelece um contrato comum às classes de alto nível para cada política:
+
+```java
+public interface CacheEvictionStrategy<T> {
+
+    public String get(T value);
+
+    public T getNextEviction();
+
+    public Integer size();
+
+}
+```
+
 ## Estrutura de diretórios
 
 Nosso projeto tem alguns **diretórios principais**, a saber:
