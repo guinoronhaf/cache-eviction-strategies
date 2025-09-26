@@ -2,7 +2,7 @@
 
   - [FIFO?](#fifo)
   - [FIFO como estratégia de cache](#fifo-como-estratégia-de-cache)
-  - [Implementação da FIFO Strategy neste projeto](#implementação-da-fifo-strategy-neste-projeto)
+  - [Implementação da FIFO Eviction Strategy neste projeto](#implementação-da-fifo-eviction-strategy-neste-projeto)
   - [Desempenho](#desempenho)
   - [Conclusão](#conclusão)
   - [Bônus](#bônus-fifo-cache-strategy-implementada-no-dia-a-dia)
@@ -14,7 +14,7 @@
 ## _FIFO_ como estratégia de _cache_
  Uma vez que o objetivo de um dispositivo _cache_ é diminuir o desperdício de tempo no ato de recuperar um dado requerido, a estratégia FIFO permite que a máquina armazene, em prontidão, os dados mais recentes por ordem de chegada. Como será mostrado abaixo, essa característica própria da lógica FIFO terá pontos fortes e pontos críticos, que se sobressaem conforme o uso escolhido para o cache.
 
-## Implementação da _FIFO Strategy_ neste projeto
+## Implementação da _FIFO Eviction Strategy_ neste projeto
  Para o estudo da _FIFO Eviction Strategy_, foi utilizada, nesse material, a implementação de um cache baseado em uma fila circular (ou seja, quando a estrutura atinge sua capacidade máxima, a solicitação de armazenamento de novos dados implica na sobrescrição dos valores mais antigos). A circularidade dessa implementação pode ser explicitada com base no método addLast(T value) (função comum a implementações de filas):
 ```Java
 public void addLast(T valor) {
