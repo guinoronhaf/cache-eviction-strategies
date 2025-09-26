@@ -74,6 +74,8 @@ Rotina de busca de um elemento materializada a partir do método indexOf que, em
  Aqui, há um padrão denotado nos gráficos que chama atenção: especificamente para a carga de dados com picos, o 'Hit Time' da política "explodiu" - sofreu uma degeneração de desempenho muito relevante. Com isso, foi, com sobras, a estratégia de cache eviction mais lerda nesse ponto. Uma pista para esse comportamento específico pode ser o próprio funcionamento da FIFO. Uma vez que um novo valor é adicionado no final da estrutura, na hipótese desse valor passar a ser muito requisitado (se tornar "quente"), tem-se que percorrer, em cada nova solicitação deste dado, toda a fila para recuperá-lo. Isso faz com que, quando há um pico de algum valor na carga Spike, o custo dessa rotina pese muito na eficiência final da política.
 
    ![Degeneração no desempenho para Hit com carga Spike](../../../../../../../data/graphs/hit_time_graphs/general_spike_time_graph.png)
+
+  Contraste de desempenho entre a FIFO e as demais políticas para esse tipo de problema. Nota-se o custo que a implementação paga por suas características próprias de design.
  
 #### Miis Time
 
