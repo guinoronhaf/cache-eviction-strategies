@@ -1,5 +1,15 @@
 # _Random Replacement Eviction Strategy_
 
+  - [Definição](#definição)
+  - [Aplicações da _Random Replacement_](#aplicações-da-random-replacement)
+  - [Implementação da estratégia de _cache_](#implementação-da-estratégia-de-cache)
+  - [Desempenho da estratégia de _cache_](#desempenho-da-estratégia-de-cache)
+  - [_Periodic workload_](#periodic-workload)
+  - [_Spike_workload_](#spike-workload)
+  - [_Randomic workload_](#randomic-workload)
+  - [Conclusão](#conclusão)
+  - [Autor](#autor)
+
 ## Definição
 A política _Random Replacement_ (RR) é uma estratégia de substituição de _cache_ que se caracteriza pela simplicidade e imprevisibilidade de sua execução. Seu funcionamento consiste em escolher, de forma aleatória e uniforme, qual elemento do _cache_ será removido quando ocorre um _miss_ em um _cache_ já cheio. Ou seja,
 sempre que um novo elemento precisa ser inserido e não há espaço disponível, o algoritmo seleciona um dos dados armazenados com probabilidade igual e o substitui pelo novo valor. Essa abordagem dispensa o uso de informações sobre tempo de acesso, frequência ou ordem de chegada, diferentemente de políticas como _LRU_ (Least Recently Used) ou _FIFO_ (First In, First Out), que dependem da manutenção de estruturas auxiliares.
@@ -155,3 +165,4 @@ No entanto, à medida que os _workloads_ se tornam maiores ou mais imprevisívei
 Vitor Hugo Dias Botelho (Github: [@vitorh333](https://github.com/vitorh333))
 
 Este arquivo faz parte do projeto final da Disciplina de Estruturas de Dados e Algoritmos do Curso de Ciência da Computação da Universidade Federal de Campina Grande durante o período 2025.1.
+
