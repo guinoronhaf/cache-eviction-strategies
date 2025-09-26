@@ -1,4 +1,4 @@
-## LFU Eviction Strategy
+## _LFU Eviction Strategy_
 
   - [Definição](#definição)
   - [_LFU como estratégia de cache_](#LFU-como-Estratégia-de-Cache)
