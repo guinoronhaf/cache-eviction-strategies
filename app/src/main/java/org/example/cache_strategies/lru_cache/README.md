@@ -232,6 +232,6 @@ A principal **vantagem competitiva** do _LRU_ reside em sua capacidade de **auto
 
 ## Autor
 
-Brunno Weslley Borges Ribeiro (Github: @brunnowxl)
+Brunno Weslley Borges Ribeiro (Github: [@Brunnowxl](https://github.com/Brunnowxl))
 
 Este arquivo faz parte do projeto final da Disciplina de Estruturas de Dados e Algoritmos do Curso de Ciência da Computação da Universidadde Federal de Campina Grande durante o período 2025.1
