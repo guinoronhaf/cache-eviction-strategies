@@ -1,4 +1,4 @@
-package org.example.cache_strategies.random_replace;
+package org.example.cache_strategies.random_replacement;
 
 import org.example.cache_strategies.util.CacheEvictionStrategy;
 

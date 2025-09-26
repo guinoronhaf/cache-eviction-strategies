@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import org.example.cache_strategies.fifo.FIFOEvictionStrategy;
 import org.example.cache_strategies.lfu.LfuCacheEvictionStrategy;
 import org.example.cache_strategies.lru_cache.LRUCacheEvictionStrategy;
-import org.example.cache_strategies.random_replace.RandomReplaceEvictionStrategy;
+import org.example.cache_strategies.random_replacement.RandomReplaceEvictionStrategy;
 import org.example.cache_strategies.second_chance.SecondChanceEvictionStrategy;
 import org.example.cache_strategies.util.CacheEvictionStrategy;
 
