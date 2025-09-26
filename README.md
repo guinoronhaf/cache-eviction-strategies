@@ -16,9 +16,43 @@
 
 - [_Workloads_](#workloads)
 
-- [Resultados](#resultados)
+## Metodologia
+### Estrutura de projeto
+Foi utilizado [_**gradle**_](https://gradle.org/) como ferramenta para organizar a estrutura de nosso projeto, além de gerenciar dependências. Além disso, fizemos uso desse sistema para gerar _gradle tasks_ que compilam e executam códigos _Java_ a partir de arquivos de _input_ vindos da entrada padrão. Aqui é um exemplo de nossas _tasks_ geradas via _Gradle_:
+
+```gradle
+tasks.register("runMainWorkload", JavaExec) {
+    group = "application"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = "org.example.program.MainWorkload"
+    standardInput = System.in
+}
+
+tasks.register("runMainPerformance", JavaExec) {
+    group = "application"
+    description = "Runs the MainPerformance class to get average hit/miss times"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = "org.example.program.MainPerformance"
+    standardInput = System.in
+}
+```
+
+### Versionamento de código
+Utilizou-se [_Git_](https://git-scm.com/) e [_Github_](https://docs.github.com/pt) para versionar dados e códigos existentes no projeto. A partir da criação de _issues_ e _branches_, foi possível dividir tarefas e separar responsabilidades, mas mantendo a coletividade do grupo inerente ao projeto.
+
+### Geração de _inputs_ (carga de dados)
+Para gerar as cargas de dados, na forma de _workloads_ de naturezas distintas, utilizamos a linguagem [_**Python**_](https://www.python.org/), amplamente conhecida por sua legibilidade, simplicidade e alto nível associado. Assim, cada _script Python_ é responsável pela geração de uma carga/cenário de testes diferentes. Assim, foi possível simular cargas randômicas (_randomic_), periódicas (_perodic_) e de picos (_spike_).
+
+### Automatizações
+Para automatizar tarefas mecânicas - tal qual a geração de _outputs_ para cada política e cada _workload - utilizou-se _scripts [_Bash_](https://wiki.debian.org/pt_BR/Bash). Através deles, torna-se mais simples a manipulação de resultados de execução entre arquivos dentros dos diretórios do projeto.
+
+### Plotagem (geração) de gráficos
+Para gerar gráficos a partir de um volume de dados muito grande na forma de arquivos _.data_ que contém um grande volume de dados. Assim, foi utilizado o _software_ de geração de dados gráficos [**R**](https://www.r-project.org/).
 
 ## Estrutura de diretórios
+
+Nosso projeto tem alguns **diretórios principais**, a saber:
+
 ```diff
   .
   |─── app
@@ -59,7 +93,7 @@ O diretório _data_ contém os dados fundamentais para o projeto de análise das
 
 Tem-se aqui os _scripts_ responsáveis pela geração de gráficos de desempenho, pela geração dos inputs que representam os _workloads_ e suas variações e pela automatização de processos de geração de dados por parte das políticas de _cache_.
 
-#### Diretório src
+#### Diretório _src_
 ```diff
   |─── src
   |    |── bin
@@ -79,6 +113,16 @@ Dentro do contexto de cada **estratégia de cache**, é possível analisar tanto
 
 ## Indicadores de tempo médio de _hit_ e _miss_
 
+Os tempos médios de _hit_ e _miss_ são fundamentais para compreender a eficiência de uma estratégia de _cache_. Através dessas métricas, é possível compreender o quão "baratos" (do ponto de vista computacional) são as operações básicas alocadas em cada uma das políticas de _cache_. Na prática, os tempos médios de _hit_ e _miss_ são obtidos pelo quociente entre o tempo total acumulado nessas operações e a quantidade de processos desse tipo contabilizados em _cache_ ao longo dos _workloads_. Tem-se, então, as seguintes relações:
+
+$`HITmedio =  \frac{HITtotal}{hits}`$
+
+$`MISSmedio =  \frac{MISStotal}{hits}`$
+
+É válido destacar que os conceitos de tempo médios de _hit_ e _miss_ são de extrema importância para compreensão dos conceitos auxiliares de _**Miss Penalty**_ e _**Overhead**_. O primeiro conceito refere-se ao impacto negativo de um _miss_ nos tempos médios da política. Como o próprio nome sugere, há uma ideia de "penalidade" embutida na ocorrência de um _miss_, já que séries de operações são necessárias para reorganizar a estrutura do _cache_.
+
+Por outro lado, é de extrema importância pontuar o impacto de cada uma das estruturas de dados utilizadas por uma política com o intuito de analisar o quão preponderante são os efeitos das propriedades das estruturas de dados sobre as estratégias de _cache_. Constrói-se, assim, o conceito geral de _Overhead_ de uma política, o qual permite a observação do desempenho de uma estratégia de _cache_ em seu nível mais interno.
+
 ## Estratégias abordadas nesse material
 
   1. [*FIFO (First-in First-Out)*](./app/src/main/java/org/example/cache_strategies/fifo/README.md)
@@ -94,7 +138,9 @@ Dentro do contexto de cada **estratégia de cache**, é possível analisar tanto
 ## _Workloads_
 É importante destacar que as análises quantitativa e qualitativa passam sobretudo pela geração de cargas de elementos que reflitam o _stress_ gerado por dados reais em aplicações complexas. Dessa forma, visando simular cargas reais de dados para as estratégias de _cache_, é possível gerar _workloads_ específicos que reflitam cenários distintos, expondo as políticas de _cache_ a cargas desafiadoras.
 
-### _Randomic_
+Apresentaremos um panorama geral de cada um dos _workloads_ a partir de uma definição geral, um exemplo concreto em aplicação real e uma tabela de frequências que refletem o estilo da carga de testes.
+
+### _Randomic workload_
 O _workload_ do tipo _randomic_ é formado apenas por dados pseudoaleatórios e buscam simular o tipo de carga mais básica para o _cache_: aquela que não segue nenhum padrão de frequência ou recência de acesso e busca.
 
 ```bash
@@ -132,8 +178,7 @@ frequência | valor
 Um _workload_ randômico pode representar situações reais em que o padrão de acesso não segue uma lógica previsível ou periódica, mas sim ocorre de forma dispersa e variável ao longo do tempo. Esse tipo de comportamento é comum em sistemas com usuários humanos, por exemplo em plataformas de streaming, redes sociais ou servidores web, onde cada acesso depende de escolhas individuais e imprevisíveis. Também aparece em cenários de segurança da informação, como ataques de negação de serviço distribuídos (DDoS), nos quais os acessos são aleatórios e massivos. Assim, _workloads_ randômicos são úteis para modelar ambientes com alta incerteza e forte influência de eventos externos.
 
 
-### _Periodic_
-
+### _Periodic workload_
 O _workload_ periódico é aquele em que a carga de trabalho segue um padrão repetitivo e ocorre em intervalos regulares, sem depender de eventos inesperados. Esse comportamento torna sua execução previsível, permitindo planejar recursos e otimizar desempenho com mais precisão.
 
 ```bash
@@ -177,7 +222,7 @@ frequência | valor
 
 Um exemplo cotidiano desse tipo de _workload_ é a sincronização automática de e-mails, que ocorre em intervalos definidos. Também podemos citar notificações de aplicativos que consultam os servidores a cada poucos minutos para verificar novas mensagens, ou as atualizações de antivírus que seguem um cronograma fixo para buscar novas assinaturas. Esses casos evidenciam cargas que seguem um agendamento técnico pré-estabelecido, ao invés de surgirem de forma aleatória.
 
-### _Spike_
+### _Spike workload_
 
 _Workloads_ do tipo _spike_ são aqueles em que a demanda é geralmente baixa ou moderada, mas ocasionalmente dispara em picos muito altos por curtos períodos de tempo. Esse comportamento é imprevisível e exige que o sistema consiga lidar com sobrecargas momentâneas sem degradar o desempenho.
 
@@ -214,4 +259,16 @@ frequência | valor
 ```
 Exemplos comuns incluem do _spike_ são acessos a sites de notícias durante acontecimentos importantes, consultas em e-commerces quando um produto entra em promoção relâmpago, ou o aumento repentino de buscas em redes sociais por um assunto viral. Nesses casos, o _workload_ não é constante nem periódico, mas gera picos intensos que podem estressar servidores e sistemas de armazenamento.
 
-## Resultados
+## Contribuintes
+
+[@ArturALW - Artur Wanderley](https://github.com/ArturALW)
+
+[@Brunnowxl - Brunno Weslley](https://github.com/Brunnowxl)
+
+[@guinoronhaf - Guilherme Noronha](https://github.com/guinoronhaf)
+
+[@victorfrancacg - Victor França](https://github.com/victorfrancacg)
+
+[@vitorh333 - Vitor Hugo](https://github.com/vitorh333)
+
+Projeto feito como trabalho final da disciplina de Estrutura de Dados e Algoritmos (EDA) e Laboratório de Estrutura de Dados e Algoritmos (LEDA) da graduação em Ciência da Computação na Universidade Federal de Campina Grande (UFCG) no período 2025.1.
