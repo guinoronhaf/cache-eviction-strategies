@@ -109,6 +109,8 @@ Como demonstra o gráfico abaixo:
 
 Portanto, apesar da política RR apresentar bom desempenho para _workloads_ periódicos e de tamanho reduzido, além de possuir uma implementação simples, é preciso considerar o trade-off das operações de consulta relativamente “lenta” em comparação a outras políticas, como _LRU_ e _Second chance_. 
 
+É importante salientar também que as constantes associadas à política _FIFO_ tendem a ser maiores do que as da política _Random_, o que impacta diretamente na sua eficiência prática. Apesar de ambas apresentarem complexidade assintótica O(_n_), a Random ainda se destaca por sua simplicidade de implementação e menor sobrecarga, tornando-se uma alternativa mais viável em cenários onde a performance prática é tão relevante quanto a análise teórica.
+
 Esse fator limita sua eficiência em _caches_ maiores ou em _workloads_ mais intensivos, ressaltando que a escolha da política de substituição deve equilibrar simplicidade de implementação e desempenho sob diferentes cenários.
 
 ### _Spike workload_
@@ -147,3 +149,9 @@ Desse modo, fica evidente que, para _workloads_ do tipo _randomic_, a RR , apesa
 Em conclusão, a _Random Replacement_ apresenta comportamentos variados dependendo do tipo de _workload_. Para _workloads_ periódicos e de tamanho reduzido, ela pode oferecer desempenho competitivo devido à simplicidade da implementação e à previsibilidade da probabilidade de acerto $P(\text{hit})$.
 
 No entanto, à medida que os _workloads_ se tornam maiores ou mais imprevisíveis, como em cenários de picos (_spike_) ou randômicos, a RR é limitada pelo custo linear de busca no _cache_ e pela perda de previsibilidade do _hit rate_. Embora possa se destacar levemente em _workloads_ randômicos, na prática esse ganho não compensa a penalização de tempo de consulta, tornando políticas como _LFU_, _LRU_ e _Second Chance_ mais eficientes e confiáveis em cenários com caches grandes ou acessos intensivos e irregulares.
+
+## Autor
+
+Vitor Hugo Dias Botelho (Github: [@vitorh333](https://github.com/vitorh333))
+
+Este arquivo faz parte do projeto final da Disciplina de Estruturas de Dados e Algoritmos do Curso de Ciência da Computação da Universidade Federal de Campina Grande durante o período 2025.1.
