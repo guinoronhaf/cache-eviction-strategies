@@ -240,7 +240,7 @@ Conclui-se, portanto, que a estratégia de _Second Chance_ constitui uma políti
 Por fim, é válido pontuar que a gama de implementações possíveis para a _Second Chance_ é vasta. Uma delas, conhecida como _**Clock-Pro**_ - que sugere um aprimoramento da implementação _Clock_ - considera a distinção entre _Hot items_ e _Cold items_, o que auxilia no ganho de desempenho do _cache_.
 
 ## Autor
-Guilherme Noronha (Github: guinoronhaf)
+Guilherme Noronha (Github: [@guinoronhaf](https://github.com/guinoronhaf))
 
 
 Este arquivo faz parte do projeto final da Disciplina de Estruturas de Dados e Algoritmos e Laboratório de Estruturas de Dados e Algoritmos do Curso de Ciência da Computação da Universidade Federal de Campina Grande durante o período 2025.1.
