@@ -237,6 +237,8 @@ Isso explica a vantagem leve de _Second Chance_ em relação a outras estratégi
 ## Conclusão
 Conclui-se, portanto, que a estratégia de _Second Chance_ constitui uma política consideravelmente boa em cenários em que requer-se um algoritmo simples e fácil de implementar e manter, além de ser uma estratégia que considera recência e frequência, ainda que de formas primitivas. É válido destacar, ainda, que para _workloads_ com picos de acesso, como processos repetidamente executados de forma abrupta, ou um _site_ acessado com muita frequência em um dia, _Second Chance_ se sai bem tanto em assertividade (quantidade de _Hits_) quanto em eficiência de tempo, possuindo _Miss Penalty_ e _Overhead_ satisfatórios.
 
+Essa característica torna a política particularmente útil em cenários em que cargas do tipo _spike_, com acessos repentinos e repetitivos, são frequentes. Em tais contextos, o balanço entre simplicidade e desempenho oferecido por _Second Chance_ e mostra vantajoso em comparação a outras estratégias aboradadas em nosso material, como _LRU_ e _Random Replacement_.
+
 Por fim, é válido pontuar que a gama de implementações possíveis para a _Second Chance_ é vasta. Uma delas, conhecida como _**Clock-Pro**_ - que sugere um aprimoramento da implementação _Clock_ - considera a distinção entre _Hot items_ e _Cold items_, o que auxilia no ganho de desempenho do _cache_.
 
 ## Autor
