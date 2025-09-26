@@ -49,6 +49,7 @@ A principal vantagem dessa implementação do LFU é sua capacidade de lidar com
 
 ```Java
     public T get(T item) {
+
         if (!this.freqMap.containsKey(item)) {
             return null;
         }
@@ -74,6 +75,7 @@ A principal vantagem dessa implementação do LFU é sua capacidade de lidar com
 
 ```Java
     public void put(T item) {
+
         if (capacity == 0) {
             return;
         }
